@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3 - Economía Colonial y Rutas Comerciales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1ed 0%, #efe9e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #C2185B 0%, #E91E63 50%, #00BCD4 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(194, 24, 91, 0.4);
+            border-bottom: 4px solid #00BCD4;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .header .level {
+            font-size: 0.95em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        /* VISTA GENERAL */
+        .overview {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .overview h2 {
+            color: #C2185B;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .overview p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .objective-item {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00BCD4;
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .objective-item strong {
+            color: #C2185B;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00BCD4 0%, #E91E63 50%, #C2185B 100%);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+        
+        /* SESIÓN CARD */
+        .session {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .session:nth-child(odd) .session-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+        
+        .session:nth-child(even) .session-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .session:nth-child(odd) .session-content,
+            .session:nth-child(even) .session-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+            }
+        }
+        
+        /* PUNTO DE LA TIMELINE */
+        .session::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00BCD4;
+            border: 4px solid #f5f1ed;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #C2185B;
+        }
+        
+        @media (max-width: 768px) {
+            .session::before {
+                left: 30px;
+            }
+        }
+        
+        .session-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f5f1ed;
+            transition: all 0.3s ease;
+        }
+        
+        .session-content:hover {
+            box-shadow: 0 8px 25px rgba(194, 24, 91, 0.15);
+            border-color: #00BCD4;
+            transform: translateY(-5px);
+        }
+        
+        .session-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #C2185B 0%, #00BCD4 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .session-content h3 {
+            color: #C2185B;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+        
+        .session-duration {
+            color: #E91E63;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .session-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .session-focus {
+            background: linear-gradient(90deg, rgba(0, 188, 212, 0.1) 0%, transparent 100%);
+            padding: 12px;
+            border-left: 3px solid #00BCD4;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+            margin-top: 12px;
+        }
+        
+        /* COMPETENCIAS */
+        .competencies {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .competencies h2 {
+            color: #C2185B;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .competency-card {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .competency-card h4 {
+            color: #C2185B;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+        
+        .competency-card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .competency-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .competency-card li::before {
+            content: '◇';
+            position: absolute;
+            left: 0;
+            color: #00BCD4;
+            font-size: 0.8em;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+        
+        .footer .highlight {
+            color: #00BCD4;
+            font-weight: bold;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.05em;
+            }
+            
+            .timeline::before {
+                height: 100%;
+            }
+            
+            .session-content {
+                padding: 20px;
+            }
+            
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Módulo 3</h1>
+            <p class="subtitle">Economía Colonial y Rutas Comerciales del Imperio Español</p>
+            <p class="level">Seconde - Matemáticas DNL Español - 5 Sesiones (5 horas)</p>
+        </div>
+    </div>
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- VISTA GENERAL -->
+        <div class="overview">
+            <h2>Visión General del Módulo</h2>
+            <p>
+                Módulo 3 exploración profunda imperio español XVI-XVII: rutas comerciales transatlánticas galeones navegación proporcionalidad distancias velocidades cálculo tiempos viajes. Potosí Cerro Rico montaña plata pura 1545 ciudad más rica mundo producción minera estadísticas porcentajes evolución 300% incremento 150 años flujos económicos planetarios. Comercio plata Sevilla Veracruz cálculo beneficios rentabilidad inflación europa "revolución de los precios" competencia entre grupos sociales Corona mineros iglesia trabajadores. Arte colonial mestizaje europeo-indígena Escuela Cuzco proporciones número áureo perspectiva canonés humanidad renacentistas adaptados contexto andino. Simulación comercial Veracruz 1650 equipos comerciantes casa negociación decisiones estratégicas riesgos eventos aleatorios ganancias pérdidas experiencia vivida. Infografía síntesis visual economia imperial datos selección diseño digital Canva infografías profesionales.
+            </p>
+            <p>
+                <strong>Síntesis experta:</strong> Rutas comerciales navegación cálculos → Potosí minería porcentajes inflación → Arte colonial proporciones perspectiva → Simulación comercial estrategia → Infografía imperio síntesis visual.
+            </p>
+            
+            <div class="objectives">
+                <div class="objective-item">
+                    <strong>🌊 Rutas Comerciales:</strong> Navegación galeones distancias proporcionalidad velocidades tiempos
+                </div>
+                <div class="objective-item">
+                    <strong>⛏️ Minería Potosí:</strong> Producción plata estadísticas porcentajes evolución económica
+                </div>
+                <div class="objective-item">
+                    <strong>💰 Economía Colonial:</strong> Inflación precios beneficios rentabilidad distribución riqueza
+                </div>
+                <div class="objective-item">
+                    <strong>🎨 Arte Colonial:</strong> Proporciones áureas perspectiva mestizaje Escuela Cuzco
+                </div>
+                <div class="objective-item">
+                    <strong>🏪 Simulación Comercial:</strong> Decisiones estratégicas riesgos negociación experiencia vivida
+                </div>
+                <div class="objective-item">
+                    <strong>📊 Infografía Imperial:</strong> Datos visualización diseño síntesis información compleja
+                </div>
+            </div>
+        </div>
+        
+        <!-- TIMELINE -->
+        <div class="timeline">
+            <!-- SESIÓN 1 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 1 / 5</span>
+                    <h3>Las Rutas Comerciales del Imperio</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Accroche geográfica emocional: "¿Sabéis España controló primer imperio mundial?" Proyección mapas colosales Imperio Español XVI-XVII máxima extensión 1580 territorio inmenso Sevilla monopolio comercial Casa de Contratación. Pregunta histórica provocadora: ¿cómo transportar oro plata América Europa? Galeones navegación rutas Tierra Firme Nueva España convoyes protegidos piratas. Contextualización: conquista comienza 1492 Colón, aceleración 1550 flujos oro plata hacia Sevilla, dominio comercial monopolístico 150 años. Introducción matemática: ¿cómo medir distancias mapa? Escala 1:10.000.000 interpretación regla tres proporcionalidad. Medición práctica: estudiantes miden centímetros Sevilla-Veracruz mapa antiguos portulanos cálculo distancia reales. Ejercicio: si 1 cm = 100 km, ¿cuántos cm Sevilla a Nueva España? Medición 8,5 cm → cálculo 8.500 km respuesta verifiable métodos alternativos. Ampliación: velocidad galeones 5 km/hora navegación realista 24 horas día? Descansos escalas tempestades vientos variables. Cálculo: 8.500 km ÷ 5 km/h = 1.700 horas = 70 días aprox (3 meses travesía épica). Comparación contemporánea: hoy Sevilla-Veracruz avión 12 horas. Proporción: 70 días × 24 horas = 1.680 horas vs 12 → 140 veces más rápido progreso tecnológico. Economía cargaisons rentabilidad: ¿qué transportaban? Manufactures europeas vinos aceites hacia América, retorno oro plata especias cacao. Cálculo beneficios: inversión 1000 pesos → retorno 3000 pesos → ganancia 2000 (200% rentabilidad). Riesgos factores adversos: piratas corsarios franceses, naufrages tormentas, mortalidad humana, perdida cargamento. Si 1 barco de 5 se pierde, riesgo 20% importante en decisiones. Prolongamiento: genealogía búsqueda antepasados marineros navegantes, archives Sevilla correspondencias época, testimonios inmigración América.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Rutas navegación mapa antiguo + escala proporcionalidad + cálculos distancias velocidades + tiempos viajes + economía beneficios riesgos
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 2 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 2 / 5</span>
+                    <h3>El Comercio de la Plata: Cálculos Porcentajes</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Sorpresa histórica: "¿Sabéis Potosí era ciudad más rica mundo?" Proyección Cerro Rico Bolivia 4000 metros altitude montaña pura plata. Descubrimiento 1545 minas transformaron economia planetary. Accroche emocional: expresión "vale un Potosí" significa riqueza incalculable. Quiénes trabajaban? Sistema mita trabajo forzado indígenas condiciones mortales extracción brutal. Contexto: plata vía Potosí → Lima → Panamá → Sevilla red transatlántica circulación riqueza. Introducción estadística: ¿cómo medir producción minera? Toneladas metálicas evolución temporal. Cálculo de evolución: 1550 (200 toneladas) → 1600 (800 toneladas). Aumento absoluto = 600 toneladas diferencia directa. Porcentaje: fórmula (Vfinal - Vinicial) ÷ Vinicial × 100 = (800-200) ÷ 200 × 100 = 600÷200×100 = 3×100 = 300%. Interpretación: producción multiplicada por 4 (800÷200=4), expresado como "incremento 300%" o "evolución +400%". Verificación: si base 200 aumenta 300%, resultado = 200 + (200×3) = 200+600 = 800 ✓ correcto. Declinación posterior: 1600-1650 (800→400 toneladas) caída 50% producción, mitad cantidad anterior, riesgos minería agotamiento. Distribución beneficios: corona española 20%, mineros 30%, iglesia 10%, trabajadores "descubierto" 40%. Cálculos: 1000 kg plata extraída → corona 200 kg, mineros 300, iglesia 100, trabajadores 400. Análisis crítico: trabajadores reciben más cantidad (400>200) pero menor prestigio social, injusticia estructural. Impacto económico europa inflación: más plata en circulación causa alza precios. Datos históricos: trigo 1500 = 2 reales/kg, 1600 = 8 reales/kg aumento 300% cuadruplicado precio. Salarios mismo periodo suben solo 100% (10→20 reales). Resultado: capacidad compra reduce 50% poder adquisitivo pérdida (5 kg trigo en 1500 vs 2,5 kg en 1600). Conclusión histórica: matemáticas revelan injusticias sociales economía colonial estructuras explotación, números brutal verdad. Prolongamiento: investigación minas alternativas Zacatecas Huancavelica, impacto ambiental ecológico, resistencias indígenas trabajos forzados.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Potosí historia + producción estadísticas + cálculo porcentajes evolución + distribución beneficios + inflación impacto económico + análisis crítico injusticia
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 3 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 3 / 5</span>
+                    <h3>Arte Colonial: Proporciones y Perspectiva</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Maravilla artística: "¿Qué mezcla de influences observáis?" Proyección Escuela Cuzco XVI-XVIII pinturas retablos mestizaje arte europeo tradiciones indígenas síntesis única. Contexto histórico: artistas indígenas formados maestros europeos, sincretismo religioso iconografía, figuras santos santos santos indígenas fusionados. Pregunta provocadora: ¿arte europeo + tradiciones andinas = creación nova? Análisis proporciones: Número Áureo φ = 1,618... aparece natura belleza universal. Medida práctica: Virgen 15 cm altura × 9,3 cm ancho → proporción 15÷9,3 = 1,61... ¡cercano número áureo! ¿Coincidencia intencional artista consciente leyes belleza? Cálculos verificación: mediciones precise reglas transparentes, compases construcción exacta, transportadores ángulos. Otros elementos respetan número áureo? Análisis comparativo múltiples obras. Regla de tercios: composición divide 9 partes iguales, líneas fuertes horizontales verticales tercios (1/3, 2/3) toile 30×20 cm → líneas en 6,7-13,3 cm horizontal, 10-20 cm vertical. Puntos fuertes intersecciones atraen vista natural. ¿Cristo está en intersección punto fuerte? Perspectiva profundidad: cómo crear ilusión tres dimensiones superficie plana? Objetos lejanos aparecen menores, líneas paralelas convergen punto fuga horizonte. Colonnade progresión geométrica: columna 1ª 10 cm, 2ª 8 cm (20% reducción), 3ª 6,4 cm (×0,8 factor constante). Cálculos verificacion: progresión geométrica 10, 8, 6,4 crea profundeur visual convincente. Proporciones cuerpo humano: canon renacentista cabeza = 1/8 total cuerpo. Si santa mide 16 cm → cabeza 2 cm (16÷8=2). Verificación: medición real 2,1 cm → 2,1÷16=0,131≈12,5% cercano ideal 1/8. Fase creativa: diseño composición personal inspirada arte colonial respetando restricciones simétricas proporciones. Formato rectangle áureo 15×9,3 cm, trazado ejes simetría, posicionamiento figura principal, perspectiva fondos arquitectónicos. Herramientas compás reglas portadores transportadores. Técnicas pintura: pastel sanguina fusain (materiales époque), colores tradicionales ocres violetas. Evaluación pares: originalidad vs tradición respeto canones, precisión geométrica mediciones, armonía estética resultado final. Prolongamiento: exposición colectiva retablo clase, investigación iconografía sincrética, correspondencia artistas Perú contemporáneo.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Arte colonial mestizaje + número áureo proporciones + regla tercios composición + perspectiva lineal profundidad + construcción geométrica rigurosa + creación artística
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 4 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 4 / 5</span>
+                    <h3>Simulación: Mercader en Veracruz</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Inmersión experiencial: "¿Estamos en Veracruz, año 1650? ¿Veis galeones llegando Sevilla?" Plateau jogo gigante A0 puerto mapa detallada casos eventos mercados rutas. Puesta en situación: cada equipo = casa comercial independiente, capital inicial 10.000 pesos invertir mercancías. Objetivo: máximo beneficio 6 meses comercio simulado. Tour 1 Compras iniciales (20 min): ¿qué mercancías disponibles? Sedas 100 pesos/quintal, especias 80 pesos/quintal, demanda interior variable. Cálculos inversión: con 10.000 pesos cuántos quintales comprar? 10.000÷100=100 máximo sedas. ¿Diversificar 50 sedas + 62 especias minimizar riesgo? Costos transporte Veracruz-México 5 pesos/quintal adicional. Cambios monetarios: pesos mexicanos vs reales castellanos? Tipo cambio 1 peso = 7,5 reales, decisiones en qué moneda operar. Competencia: equipos 1-2-3 compran sedas también sube precio disponibilidad? Información compartir estratégicamente o ocultar ventaja? Tour 2 Eventos aleatorios (25 min): tirada dados, carta "corsarios francés capturan navío Cádiz" crisis suministro, precios sedas suben 20%! Decisión inmediata: vender ya o esperar mejores precios? Análisis: si precio seda 100→120, beneficio papel 2.000 pesos pero demanda caer próximamente? Negociación inter-equipos: vender 20 quintales equipo 2 por 125 pesos mutuamente ventajoso? Crédit bancario: oportunidad aprovechar suben precios pero requiere préstamo 5.000 pesos 15% anual, 6 meses = 5.000×1,075 = 5.375 devolver. Cálculos beneficio esperado > costo préstamo? Tour 3 Ventas finales (25 min): dónde vender mejores precios? México seda 140, Puebla 130, Oaxaca 150. Transporte Oaxaca 12 pesos vs 5 km local. Cálculo neto: Oaxaca 150-12=138 vs México 140-5=135. Mejor opción Oaxaca +3 pesos/quintal. Recapitulación operaciones: comprado 100 quintales seda × 100 = 10.000 pesos, transporte 100×5 = 500, vendido 100×138 = 13.800. Beneficio = 13.800-10.000-500 = 3.300 pesos brutos. Gastos adicionales: cambios moneda 3%, impuestos quinto real 20% beneficios. Cálculo exacto 3.300-(3.300×0,03)-(3.300×0,2) = 3.300-99-660 = 2.541 beneficio neto. Comparación equipos: ¿equipo 1 ganó 2.800, equipo 2 3.200, equipo 3 1.800? Diferencias estratégicas decisiones cooperación vs competencia, diversificación vs especialización, información análisis fortuna. Lecciones integrales: matemáticas esenciales éxito comercial, proporcionalidad porcentajes optimización, riesgos probabilidades, negociación estrategia, historia viva experiencia transporta al XVII sentido inmediatez decisiones vitales. Certificación equipos casa comercial más exitosa, reconocimiento creatividad, celebración valores cooperación equidad. Prolongamiento: correspondencia Veracruz real comerciantes, investigación archivos colonial, ampliacion simulación otros puertos.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Simulación comercial inmersiva + cálculos inversión beneficio + eventos aleatorios riesgos + negociación inter-equipos + análisis estratégico + experiencia vivida aprendizaje emocional
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 5 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 5 / 5</span>
+                    <h3>Infografía: La Economía del Imperio</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Síntesis visual: "¿Cómo resumir toda economía imperial en imagen?" Proyección infografías National Geographic modernas ejemplos impacto datos. Pregunta creative: ¿qué información módulo merece visualización profesional? Cómo hacer comprensible lo complejo? Propuesta proyecto: crear infografías equipos 3-4 personas temas diferentes imperio. Fases: investigación datos → selección información → diseño conceptual → realización técnica. Tiempo 50 minutos completar ciclo, evaluación impacto comunicacional. Fase 1 Datos (15 min): qué información recogida sesiones previas? Rutas comerciales 15 liaisons principales distancias tiempos duración. Potosí producción 1545-1700 data anual, gráficos evolución. Distribución riqueza Corona 20%, Mineros 30%, Iglesia 10%, Trabajadores 40% porcentajes. Inflación Europa 1500-1650 curvas precios índices. Búsqueda complementaria: qué datos faltan? Población imperio, ciudades coloniales, galeones construidas, cantidad plata total extraída. Fuentes históricas Archives Generales Indias Sevilla, registros Casa Contratación, documentos Vice-royaute, correspondencias marchands época, reportes autoridades. Verificación exactitud números: primarias vs estimaciones modernas, referencias citadas. Fase 2 Diseño (20 min): cómo organizar información visualmente? Flujo lectura arriba abajo, izquierda derecha, espiral centro expansión. Organización thématique geográfica cronológica? Visualización datos qué tipo gráfico? Circular pie chart distribución plata por grupos, histograma evolución producción Potosí toneladas años, mapa rutas comerciales galeones, línea temporal eventos imperiales claves. Colores evocadores época: oro, rojo intenso, marrón tierra, plata metálica. Tipografía clásica renacentista o moderna limpidez? Ilustraciones: mapas antiguas portulanos, retratos Charles Quint Felipe II, vistas ciudades coloniales, grabados galeones puertos. Software: Canva gratuito educación, PowerPoint templates, Photoshop avanzado, Illustrator vectores, Tableau infografías interactivas. Resolución impresión A1 mínimo 300 dpi, formato vertical u horizontal? Equilibrio textos gráficos imágenes proporciones visuales. Fase 3 Realización (15 min): distribución tareas equipo. Quien investigación datos compilo? Quién diseña layout maqueta? Quién crea gráficos diagramas? Quién redacta textos explicativos? Quién verifica ortografía español corrección contenido? Importación datos tableros automáticos, escalas mapas proporciones exactas, verificación lisibilidad lejanía, mejoras visuales iterativas. Fase 4 Presentación (2 min): 2 minutos presentación equipo + 1 minuto preguntas audiencia. Dato más sorprendente destacado? Conclusión principal revelada infografía? Cuál equipo infografía más clara impactante? Mejor equilibrio estética información utilización creativa matemáticas números visualización. Evalua ción pares: rubric calidad científica /8 (datos precisos fuentes), diseño visual /6 (armonía composición), impacto comunicacional /4 (mensaje comprensible efectivo), técnica herramientas /2 (dominio software). Prolongamiento: exposición numérica site web establecimiento, redes sociales educación, compartir establecimientos partenaires, concurso infografía académico regional, publicación proyecto innovación pédagógica.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Síntesis datos módulo complete + selección información relevante + diseño visual coherente + creación infografía profesional + presentación pública evaluación comunicacional
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMPETENCIAS -->
+        <div class="competencies">
+            <h2>Competencias Avanzadas Desarrolladas</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h4>🌊 Matemáticas Navegación Maritima</h4>
+                    <ul>
+                        <li>Escala cartográfica interpretación mapas</li>
+                        <li>Proporcionalidad regla tres cálculos</li>
+                        <li>Distancias reales conversión unidades</li>
+                        <li>Velocidad distancia tiempo ecuaciones</li>
+                        <li>Duración viajes océano cálculos complejos</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>⛏️ Estadística Minería Producción</h4>
+                    <ul>
+                        <li>Datos producción toneladas evolución temporal</li>
+                        <li>Porcentajes cálculos fórmulas rigurosas</li>
+                        <li>Cambios relativos absolutos interpretación</li>
+                        <li>Distribución recursos grupos sociales análisis</li>
+                        <li>Tablas gráficos visualización estadística</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>💰 Economía Comercial Finanzas</h4>
+                    <ul>
+                        <li>Inversión beneficio rentabilidad cálculos</li>
+                        <li>Inflación cambio precios poderes adquisitivos</li>
+                        <li>Cambios monetarios tipos conversión</li>
+                        <li>Intereses prestamos modelos económicos</li>
+                        <li>Análisis riesgos probabilidades decisiones</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🎨 Proporciones Geometría Artística</h4>
+                    <ul>
+                        <li>Número áureo φ = 1,618 aplicaciones</li>
+                        <li>Proporciones cuerpo humano canon renacentista</li>
+                        <li>Perspectiva lineal profundidad construcción</li>
+                        <li>Regla tercios composición visual equilibrio</li>
+                        <li>Construcciones geométricas precisas herramientas</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🏪 Simulación Estrategia Negociación</h4>
+                    <ul>
+                        <li>Toma decisiones contexto incertidumbre</li>
+                        <li>Análisis riesgos beneficios evaluación opciones</li>
+                        <li>Negociación inter-equipos cooperación conflicto</li>
+                        <li>Cálculos rápidos precisos presión temporal</li>
+                        <li>Reflexión crítica estrategias comparativas</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>📊 Diseño Infografía Comunicación</h4>
+                    <ul>
+                        <li>Selección datos relevancia impacto</li>
+                        <li>Visualización información gráficos elegidos</li>
+                        <li>Diseño visual principios composición equilibrio</li>
+                        <li>Herramientas digitales Canva Photoshop Excel</li>
+                        <li>Comunicación efectiva mensaje claro impactante</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>Módulo 3 - Economía Colonial y Rutas Comerciales del Imperio Español</strong></p>
+        <p>Pensionnat Sacré-Cœur, Reims | Matemáticas DNL Español | Seconde</p>
+        <p>
+            <span class="highlight">🚢 Rutas galeones distancias velocidades, Potosí plata porcentajes inflación, arte colonial proporciones, simulación mercader Veracruz estrategia, infografía imperio síntesis visual 🚢</span>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.85;">
+            Módulo 3 inmersión economía imperial XVI-XVII: navegación galeones cálculos proporcionalidad distancias velocidades tiempos, minería Potosí plata estadísticas porcentajes inflación impacto europeo, arte colonial mestizaje proporciones perspectiva canones renacentistas, simulación comercial Veracruz decisiones estratégicas riesgos experiencia vivida, infografía síntesis visual datos complejos. Estudiantes transformados estrategas comerciales analistas económicos, matemáticos navegantes, diseñadores visuales, historiadores críticos. Descubrimiento: imperio español estructuras explotación injusticia visibles números, creatividad humana continúa contextos opresión (arte colonial), riesgos fortuna definen vidas comerciales mercaderes. Herencia paradójica: riqueza inmensa destrucción pueblos indígenas, belleza artística mestiza sobre dolor cultural.
+        </p>
+    </div>
+</body>
+</html>

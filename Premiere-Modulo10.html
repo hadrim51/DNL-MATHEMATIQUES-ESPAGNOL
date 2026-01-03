@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 10 - Probabilidades: Juegos Precolombinos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            background: linear-gradient(135deg, #f5f1ed 0%, #efe9e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #C2185B 0%, #E91E63 50%, #00BCD4 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(194, 24, 91, 0.4);
+            border-bottom: 4px solid #00BCD4;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+
+        .header .level {
+            font-size: 0.95em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        /* VISTA GENERAL */
+        .overview {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+
+        .overview h2 {
+            color: #C2185B;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+
+        .overview p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .objective-item {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00BCD4;
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .objective-item strong {
+            color: #C2185B;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00BCD4 0%, #E91E63 50%, #C2185B 100%);
+            border-radius: 2px;
+        }
+
+        @media max-width: 768px {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+
+        /* SESIÓN CARD */
+        .session {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .session:nth-child(odd) .session-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+
+        .session:nth-child(even) .session-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .session:nth-child(odd) .session-content,
+            .session:nth-child(even) .session-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+            }
+        }
+
+        /* PUNTO DE LA TIMELINE */
+        .session::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00BCD4;
+            border: 4px solid #f5f1ed;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #C2185B;
+        }
+
+        @media (max-width: 768px) {
+            .session::before {
+                left: 30px;
+            }
+        }
+
+        .session-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f5f1ed;
+            transition: all 0.3s ease;
+        }
+
+        .session-content:hover {
+            box-shadow: 0 8px 25px rgba(194, 24, 91, 0.15);
+            border-color: #00BCD4;
+            transform: translateY(-5px);
+        }
+
+        .session-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #C2185B 0%, #00BCD4 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .session-content h3 {
+            color: #C2185B;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+
+        .session-duration {
+            color: #E91E63;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .session-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .session-focus {
+            background: linear-gradient(90deg, rgba(0, 188, 212, 0.1) 0%, transparent 100%);
+            padding: 12px;
+            border-left: 3px solid #00BCD4;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        /* COMPETENCIAS */
+        .competencies {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+
+        .competencies h2 {
+            color: #C2185B;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .competency-card {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #00BCD4;
+        }
+
+        .competency-card h4 {
+            color: #C2185B;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+
+        .competency-card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .competency-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .competency-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00BCD4;
+            font-size: 0.8em;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            border-top: 4px solid #00BCD4;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+
+        .footer .highlight {
+            color: #00BCD4;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .header .subtitle {
+                font-size: 1.05em;
+            }
+
+            .session-content {
+                padding: 20px;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-content">
+        <h1>Módulo 10</h1>
+        <p class="subtitle">Probabilidades: Juegos Precolombinos</p>
+        <p class="level">Primera - Matemáticas DNL Español - 5 Sesiones (5 horas)</p>
+    </div>
+</div>
+
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="container">
+
+    <!-- VISTA GENERAL -->
+    <div class="overview">
+        <h2>Visión General del Módulo</h2>
+
+        <p>Módulo 10 travesía apasionante mundo juegos rituales mesoamericanos descubrimiento probabilidades través experiencias concretas. Estudiantes manipulan conceptos azar, destino, estrategia analizando jegos mayas aztecas incaicos matemáticamente. Jgego pelota maya simulación probabilística donde calcular chances marcar aro (1/50). Análisis matemático códex antiguos descifrar reglas perdidas probabilidades condicionais. Reconstitución patolli azteca dénombrement combinatoria 32 combinaciones posibles. Creación colaborativa juego precolombino original respetando restricciones culturales matemáticas. Debate filosófico azar vs destino sintesis módulo completo reflexión profunda.</p>
+
+        <p><strong>Síntesis experta:</strong> Pelota maya simulación probabilística → Análisis códex probabilidades condicionais → Patolli azteca combinatoria → Creación juego original → Debate azar destino filosofía.</p>
+
+        <div class="objectives">
+            <div class="objective-item">
+                <strong>Jgeo Pelota Maya</strong>
+                Simulación experimental lógica probabilidades cálculo teórico experimentación
+            </div>
+            <div class="objective-item">
+                <strong>Análisis Códex</strong>
+                Humanidades numéricas lectura códex matemática probabilidades condicionais
+            </div>
+            <div class="objective-item">
+                <strong>Patolli Azteca</strong>
+                Combinatoria dénombrement reglas históricas equidad matemática análisis
+            </div>
+            <div class="objective-item">
+                <strong>Creación Juego</strong>
+                Diseño colaborativo prototipado innovación restricciones autenticidad cultural
+            </div>
+            <div class="objective-item">
+                <strong>Debate Filosófico</strong>
+                Argumentación en español relativismo cultural síntesis aprendizajes reflexión
+            </div>
+            <div class="objective-item">
+                <strong>Competencias Transversales</strong>
+                Pensamiento crítico colaboración creatividad interculturalidad mediacin pública
+            </div>
+        </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+
+        <!-- SESIÓN 1 -->
+        <div class="session">
+            <div class="session-content">
+                <span class="session-number">SESIÓN 1 / 5</span>
+                <h3>El Juego de Pelota Maya: Probabilidades Rituales</h3>
+                <p class="session-duration">60 minutos</p>
+                <p class="session-description">
+                    Accroche emocional asombroso: "¿Qué deporte conocéis que podía costar la vida?" Descubrimiento civilización maya hace 3000 años Imperio mesoamericano jgeo pelota sagrado. Navegación virtual 3D terrains auténticos Chichén Itzá Guatemala 47 campos arqueológicos medidos. Observación física anatomía cancha cruz perfecta 95m longitud aro 7m altura lado. Preguntas provocadoras ¿probabilidad marcar aro fácil difícil? Estimación 1/50 marcar. Fase manipulativa simulación concreta dés lanzamientos compilation resultados clase entera. Lógica probabilística concepto acontecimiento aleatorio frecuencia observada vs teórica. Análisis dimensión ritual cosmológica: ¿por qué mayas consideraban juego sagrado? Conexión destino cosmológico sacrificio ritual divinidad. Prolongamiento correspondencia virtual estudiantes Guatemala archaeologistas.
+                </p>
+                <div class="session-focus">
+                    <strong>Enfoque clave:</strong> Jgeo pelota inmersión cultural simulación experimental probabilidades ley grandes números contexto religioso cosmológico
+                </div>
+            </div>
+        </div>
+
+        <!-- SESIÓN 2 -->
+        <div class="session">
+            <div class="session-content">
+                <span class="session-number">SESIÓN 2 / 5</span>
+                <h3>Análisis Matemático de Códex de Juegos</h3>
+                <p class="session-duration">60 minutos</p>
+                <p class="session-description">
+                    Descubrimiento asombroso civilizaciones precolombinas conservaban conocimiento escrito códex pictóricos tradición oral matemática codificada símbolos. Presentación códex originales Borgia Fejérváry-Mayer Dresden reproductions HD plastificadas. Preguntas misterio ¿cómo descifrar reglas juegos perdidos millennia? Metodología análisis dénombrement contar jugadores escenas patrones repetitivos reconocimiento símbolos numéricos mayas. Construcción arboles probabilísticos probabilidades condicionais P(A|B) si jugador A gana qué probabilidad tiene B? Implementación software R análisis estadístico comparación teórico versus observación codex. Competencia humanidades digitales aplicada antropología matemática. Dimensión intercultural respeto inteligencia maya precolombina.
+                </p>
+                <div class="session-focus">
+                    <strong>Enfoque clave:</strong> Humanidades digitales análisis códex probabilidades condicionais modelización matemática historia arqueología antropología
+                </div>
+            </div>
+        </div>
+
+        <!-- SESIÓN 3 -->
+        <div class="session">
+            <div class="session-content">
+                <span class="session-number">SESIÓN 3 / 5</span>
+                <h3>Reconstitución de Juegos Aztecas: Patolli</h3>
+                <p class="session-duration">60 minutos</p>
+                <p class="session-description">
+                    Transición Maya → Azteca Imperio Tenochtitlan 1519 metrópoli 200,000 habitantes. Descubrimiento patolli juego azqueca plateau cruciforme 52 casillas haricots marcados dados. Observación fenomenológica materiales auténticos reproducción codex. Preguntas fundamentales ¿cuántas combinaciones posibles 5 haricots 1 marcado? Respuesta 32 combinaciones dénombrement análisis combinatoria. Calculos P(1 punto) 5/32 P(5 puntos) 1/32 probabilidades desiguales investigación razonamientos. Fabricación proto material manipulación concreta. Experimento grupal partidas múltiples compilación datos análisis estrategias óptimas equidad matemática. Comparación Maya pelota versus Azteca patolli rol azar vs habilidad.
+                </p>
+                <div class="session-focus">
+                    <strong>Enfoque clave:</strong> Combinatoria dénombrement fabricación material experimentación análisis datos equidad probabilística análisis estratégico
+                </div>
+            </div>
+        </div>
+
+        <!-- SESIÓN 4 -->
+        <div class="session">
+            <div class="session-content">
+                <span class="session-number">SESIÓN 4 / 5</span>
+                <h3>Creación Colaborativa: Invención Juego Precolombino</h3>
+                <p class="session-duration">60 minutos</p>
+                <p class="session-description">
+                    Transformación estudiantes espectadores artesanos creativos diseñadores. Desafío "¿podríais crear juego precolombino respetando restricciones probabilísticas?" Trabajo grupos 4 estudiantes elección civilización tema mitológico personajes sagrados. Fase concepto brainstorming visualización mecánicas centrales. Fase técnica construcción carton pluma feutres herramientas fabricación. Fase prototipado rápido tests validación internos externos. Preguntas orientación ¿sistemas equiprobables? ¿equilibrados? ¿divertidos? ¿respetan autenticidad cultural? Evaluación mutua feedback constructivo mejoras iterativas. Showcase final presentación 2 min cada grupo criterios innovación matemáticas autenticidad cultura.
+                </p>
+                <div class="session-focus">
+                    <strong>Enfoque clave:</strong> Diseño colaborativo creatividad restricciones prototipado testing validación presentación pública evaluación pares
+                </div>
+            </div>
+        </div>
+
+        <!-- SESIÓN 5 -->
+        <div class="session">
+            <div class="session-content">
+                <span class="session-number">SESIÓN 5 / 5</span>
+                <h3>Debate: ¿Azar o Destino en Culturas Antiguas?</h3>
+                <p class="session-duration">60 minutos</p>
+                <p class="session-description">
+                    Evaluación sumativa transformada filosofía reflexión metacognitiva. Accroche existencial ¿creéis destino casualidad? ¿matemáticas explican todo? ¿dioses intervienen probabilidades? Debate estructurado 3 equipos posiciones Azar Mathématique (todo calculable) Destino Cósmico (fuerzas superiores) Síntesis Dialéctica (ambas realidades). Preparación estratégica argumentos referencias textos Borges Pascal Popol Vuh Sahagún. Fase confrontación debate 25 min argumentación refutación escucha activa. Testimonios culturales sincretismo colonial survivance precolombina mundo contemporáneo. Voto secreto posición personal evolución pensamiento. Redacción ensayo reflexivo 300 palabras español. Bilan módulo integración probabilidades cultura filosofía.
+                </p>
+                <div class="session-focus">
+                    <strong>Enfoque clave:</strong> Debate filosófico argumentación en español síntesis aprendizajes reflexión metacognitiva relativismo cultural dialogismo intercultural
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencies">
+        <h2>Competencias Avanzadas Desarrolladas</h2>
+
+        <div class="competency-grid">
+            <div class="competency-card">
+                <h4>Probabilidades Concretas</h4>
+                <ul>
+                    <li>Conceptos evento aleatorio espacio muestral</li>
+                    <li>Cálculo probabilidades simples y compuestas</li>
+                    <li>Probabilidades condicionais P(A|B)</li>
+                    <li>Lógica dénombrement combinatoria</li>
+                    <li>Interpretación frecuencias resultados</li>
+                </ul>
+            </div>
+
+            <div class="competency-card">
+                <h4>Análisis Estadístico Avanzado</h4>
+                <ul>
+                    <li>Simulación Monte Carlo</li>
+                    <li>Tests hipótesis significatividad</li>
+                    <li>Intervalos confianza</li>
+                    <li>Análisis datos software estadístico</li>
+                    <li>Comparación teoría vs experiencia</li>
+                </ul>
+            </div>
+
+            <div class="competency-card">
+                <h4>Humanidades Digitales</h4>
+                <ul>
+                    <li>Análisis matemático documentos históricos</li>
+                    <li>Lectura códex precolombinos</li>
+                    <li>Reconstitución reglas perdidas</li>
+                    <li>Metodología investigación etnomatemática</li>
+                    <li>Herramientas digitales análisis</li>
+                </ul>
+            </div>
+
+            <div class="competency-card">
+                <h4>Creación Innovadora</h4>
+                <ul>
+                    <li>Diseño sistemas probabilísticos</li>
+                    <li>Prototipado iterativo validación</li>
+                    <li>Equilibrado matemático juegos</li>
+                    <li>Integración restricciones culturales</li>
+                    <li>Colaboración interdisciplinaria</li>
+                </ul>
+            </div>
+
+            <div class="competency-card">
+                <h4>Argumentación Filosofía</h4>
+                <ul>
+                    <li>Debate en español técnico formal</li>
+                    <li>Construcción argumentos lógicos</li>
+                    <li>Refutación objeciones opuestos</li>
+                    <li>Síntesis posiciones complejas</li>
+                    <li>Relativismo cultural reflexión</li>
+                </ul>
+            </div>
+
+            <div class="competency-card">
+                <h4>Dimensión Intercultural</h4>
+                <ul>
+                    <li>Respeto diversidad sistemas pensamiento</li>
+                    <li>Comprensión contexto histórico precolombino</li>
+                    <li>Aprecio ingenio matemático ancestral</li>
+                    <li>Sensibilidad destrucción patrimonio</li>
+                    <li>Ciudadanía global responsabilidad</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><strong>Módulo 10 - Probabilidades: Juegos Precolombinos</strong></p>
+    <p>Pensionnat Sacré-Cœur, Reims - Matemáticas DNL Español - Primera</p>
+    <p><span class="highlight">Jegos precolombinos probabilidades → Análisis códex humanidades digitales → Patolli combinatoria → Creación original innovación → Debate azar destino filosofía</span></p>
+    <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.85;">
+        Módulo 10 completo exploración etnomatemática juegos rituales mesoamericanos. De pelota maya simulación experimental passando análisis códex hasta patolli azteca creación original, estudiantes descubren probabilidades no abstracción fría sino creación humana universal respetable diversa. Debate filosófico cierrá módulo transformación profunda visión matemáticas espiritualidad cultures ancestrales. Legado inteligencia precolombina patrimonio humanidad compartida.
+    </p>
+</div>
+
+</body>
+</html>

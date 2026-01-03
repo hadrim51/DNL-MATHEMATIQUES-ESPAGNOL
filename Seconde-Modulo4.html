@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4 - Enjeux Sociaux Contemporains et Art Engagé</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1ed 0%, #efe9e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #C2185B 0%, #E91E63 50%, #00BCD4 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(194, 24, 91, 0.4);
+            border-bottom: 4px solid #00BCD4;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .header .level {
+            font-size: 0.95em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        /* VISTA GENERAL */
+        .overview {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .overview h2 {
+            color: #C2185B;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .overview p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .objective-item {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00BCD4;
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .objective-item strong {
+            color: #C2185B;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00BCD4 0%, #E91E63 50%, #C2185B 100%);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+        
+        /* SESIÓN CARD */
+        .session {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .session:nth-child(odd) .session-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+        
+        .session:nth-child(even) .session-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .session:nth-child(odd) .session-content,
+            .session:nth-child(even) .session-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+            }
+        }
+        
+        /* PUNTO DE LA TIMELINE */
+        .session::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00BCD4;
+            border: 4px solid #f5f1ed;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #C2185B;
+        }
+        
+        @media (max-width: 768px) {
+            .session::before {
+                left: 30px;
+            }
+        }
+        
+        .session-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f5f1ed;
+            transition: all 0.3s ease;
+        }
+        
+        .session-content:hover {
+            box-shadow: 0 8px 25px rgba(194, 24, 91, 0.15);
+            border-color: #00BCD4;
+            transform: translateY(-5px);
+        }
+        
+        .session-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #C2185B 0%, #00BCD4 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .session-content h3 {
+            color: #C2185B;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+        
+        .session-duration {
+            color: #E91E63;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .session-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .session-focus {
+            background: linear-gradient(90deg, rgba(0, 188, 212, 0.1) 0%, transparent 100%);
+            padding: 12px;
+            border-left: 3px solid #00BCD4;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+            margin-top: 12px;
+        }
+        
+        /* COMPETENCIAS */
+        .competencies {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .competencies h2 {
+            color: #C2185B;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .competency-card {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .competency-card h4 {
+            color: #C2185B;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+        
+        .competency-card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .competency-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .competency-card li::before {
+            content: '◇';
+            position: absolute;
+            left: 0;
+            color: #00BCD4;
+            font-size: 0.8em;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+        
+        .footer .highlight {
+            color: #00BCD4;
+            font-weight: bold;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.05em;
+            }
+            
+            .timeline::before {
+                height: 100%;
+            }
+            
+            .session-content {
+                padding: 20px;
+            }
+            
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Módulo 4</h1>
+            <p class="subtitle">Enjeux Sociaux Contemporains et Art Engagé: Demografía, Estadística, Muralismo</p>
+            <p class="level">Seconde - Matemáticas DNL Español - 5 Sesiones (5 horas)</p>
+        </div>
+    </div>
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- VISTA GENERAL -->
+        <div class="overview">
+            <h2>Visión General del Módulo</h2>
+            <p>
+                Módulo 4 inmersión simultanea enjeux sociaux contemporains Amérique Latine estadística rigorosa arte engagé como herramienta cambio social. Demografía América Latina recopilación datos CEPAL fuentes oficiales confiables 650 millones habitantes distribución geográfica crecimiento poblacional tasas natalidad mortalidad. Estadística aplicada: cálculos medias medianas cuartiles análisis dispersión datos brutos transformación información comprensible. Visualización gráficos barras sectores líneas histogramas elección tipos según datos transmisión eficaz mensajes complejos. Muralismo mexicano Diego Rivera contexto Revolución Mexicana 1920 arte como denuncia injusticia social grupos socioeconómicos distribución poder representación visual proporciones composición. Conexión matemática estadística arte: proporciones figuras humanas en murales reflejan realidades demográficas proyectan visiones políticas sociedades. Creación "mural estadístico" síntesis: estudiantes transforman datos demografía contemporánea en representación artística inspirada muralismo mexicano combina rigor estadístico con impacto emocional artístico. Presentación pública evento valorización: cada grupo presenta análisis demográfico gráficos profesionales mural colectivo para público institucional integración estadística-arte diálogo público sobre realidades sociales actuales. Progresión arquitectónica: datos → cálculos → gráficos → arte → acción social ciudadanía activa transformación.
+            </p>
+            <p>
+                <strong>Síntesis experta:</strong> Demografía Latinoamérica datos → Estadística cálculos análisis → Gráficos visualización datos → Muralismo mexicano arte social → Creación mural estadístico síntesis → Presentación pública acción ciudadana.
+            </p>
+            
+            <div class="objectives">
+                <div class="objective-item">
+                    <strong>📊 Demografía:</strong> Recopilación datos población CEPAL fuentes oficiales confiables
+                </div>
+                <div class="objective-item">
+                    <strong>🔢 Estadística:</strong> Cálculos medias medianas cuartiles análisis dispersión datos
+                </div>
+                <div class="objective-item">
+                    <strong>📈 Gráficos:</strong> Visualización barras sectores líneas histogramas selección óptima
+                </div>
+                <div class="objective-item">
+                    <strong>🎨 Muralismo:</strong> Arte engagé Rivera proporción composición denuncia social
+                </div>
+                <div class="objective-item">
+                    <strong>🖌️ Creación Artística:</strong> Mural estadístico síntesis datos-arte composición
+                </div>
+                <div class="objective-item">
+                    <strong>🎤 Presentación:</strong> Comunicación pública evento ciudadanía activa enjeux sociales
+                </div>
+            </div>
+        </div>
+        
+        <!-- TIMELINE -->
+        <div class="timeline">
+            <!-- SESIÓN 1 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 1 / 5</span>
+                    <h3>Demografía de América Latina: Recopilación Datos</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Accroche demográfica emocional: "¿Cuántos habitantes pensáis América Latina?" (650 millones respuesta). ¿Qué país más poblado: México, Brasil, Argentina? ¿Ciudades crecen despueblan rapidez variable? Pregunta problematizadora: ¿cómo obtener datos fiables sobre poblaciones enteras? Respuesta institucional oficial: CEPAL Comisión Económica América Latina sede Santiago, institutos nacionales INEGI México IBGE Brasil INDEC Argentina DANE Colombia. Diferencias fuentes verificación confiabilidad metadata fecha organismo metodología recuento. Contextualización histórica: importancia demográfica planeación escuelas hospitales viviendas infraestructura proyecciones futuro planificación pública. Actividad investigación colaborativa: estudiantes dividen grupos 2-3 países específicos búsqueda sistemática datos. Fases recopilación metodología clara acceso CEPAL base datos descargas CSV Excel tablas población total, densidad poblacional, crecimiento anual, urbanización, grupos edad, esperanza vida. Variabilidad datos internacionales disponibilidad inconsistencias resolución criterios. Organización información formato consistente codificación colores regiones geográficas mapas Amérique latine con capitales fronteras agrupaciones poblacionales. Síntesis colectiva: compilación base datos común clase 10-15 países América Latina variables múltiples verificación coherencia comparativa entre fuentes. Sorpresas datos: Brasil 215 millones magnitud comparación Uruguay 3,5 millones contraste. Preguntas interpretación preliminar: ¿ciudades más pobladas concentran población? ¿Tendencias urbanización evidentes geográficamente? Conclusión fase: construcción fundación empírica sólida para estadística aplicada semanas siguientes. Prolongamiento investigación: búsqueda contexto social político factores históricos explican distribución poblacional migración interna flujos. Genealogía familiar migración antepasados historias personales enraizadas estadística.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Recopilación datos confiables CEPAL fuentes oficiales + metodología búsqueda + organización información sistemas + compilación base datos común + interpretación preliminar
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 2 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 2 / 5</span>
+                    <h3>Cálculos Estadísticos: Medias, Medianas, Cuartiles</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Accroche estadística provocadora: "¿Números brutos 'en el papel' dicen toda historia?" Cómo resumir 15-20 países información masiva en cifras claves representativas. Pregunta estratégica: ¿qué país representa 'típica' América Latina media central? Revisión datos sesión anterior verificación integridad bases. Fase 1 cálculos tendencia central (18 minutos): definición media aritmética suma total elementos división cantidad. Práctica: población media 10 países seleccionados cálculo colaborativo. Brasil 215 millones 'distorsiona' media resultado sesgado? Limitaciones media interpretación crítica. Cálculo mediana: ordenamiento datos ascendente identificación valor central si cantidad par promedio valores centrales 5° 6°. Comparación media-mediana coincidencia diferencias grandes divergencias indican asimetría distribución. Interpretación: si media 47 millones mediana 32 millones datos sesgados países grandes. Representatividad típica: mediana refleja mejor realidad país 'normal' América Latina. Fase 2 cálculos dispersión (20 minutos): cuartiles división datos cuatro grupos iguales Q1 25% Q3 75% identificación posiciones. Rango intercuartílico IQR = Q3 - Q1 medida dispersión concentración datos. Análisis valencias atípicas outliers: fórmula detección matemática Q1 - 1.5×IQR o Q3 + 1.5×IQR. Brasil Uruguay posibles atípicos? Decisión estadística: eliminar justificar explicar. Fase 3 cálculos tableur (12 minutos): introducción datos columnas Excel/Calc fórmulas =PROMEDIO() =MEDIANA() =CUARTIL(). Verificación coïncidence resultados manuales vs software. Organización datos futuros análisis variables adicionales densidad crecimiento urbanización. Fase 4 síntesis interpretación (2 minutos): cuáles cifras claves América Latina media 47 mediana 32 dispersión evidentes? Conclusión: América Latina altamente heterogénea diversidad demográfica significativa. Prolongamiento: investigación contextual factores históricos políticos económicos explican distribuciones desiguales diferencias entre países historia colonias modernidad globalización.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Media aritmética cálculo interpretación + Mediana posición central representatividad + Cuartiles dispersión IQR análisis + Detección valores atípicos criterios matemáticos + Tableur verificación
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 3 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 3 / 5</span>
+                    <h3>Gráficos Estadísticos: Visualizar Datos</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Accroche visual impactante: "¿Preferís tabla 50 números o gráfico colorido comprensible?" Transmisión rápida información visualización instantánea vs lectura lenta números. Pregunta provocadora: ¿gráficos pueden mentir manipular? Ejemplos periódicos El País La Nación infografías demográficas profesionales impacto mediático. Fase 1 elección tipo gráfico (15 minutos): decisión algorítmica datos → gráfico óptimo. Gráficos barras verticales comparación países población ordenamiento alfabético cresciente decresciente. Barras horizontales variante lectura diferente. Gráficos sectores 'camembert' proporciones distribución porcentajes máximo 5-6 secciones legibilidad. Líneas evolución temporal crecimiento 2000-2020 multilineal comparación países tendencias. Histogramas distribución frecuencias grupos edad intervalos inteligentes. Otras opciones caja bigotes dispersión nubes puntos. Criterios selección tipo datos variables dependencias temporales proporción. Fase 2 creación colaborativa guiada (25 minutos): equipos 3-4 personas asignación gráficos diferentes. Selección datos tableur fórmulas. Elección software LibreOffice Calc Excel Google Sheets Canva online tools. Asistente gráficos automático vs creación manual. Decisiones visuales colores paletas harmonía esquemas cromáticos diferenciación países regiones. Títulos ejes leyendas elementos obligatorios contexto comprensión. Verificación datos gráfico coïncidence tabla original % sumatoria 100% si sectores. Fase 3 mejora finalización (10 minutos): esthétique visual contraste claridad escala vertical legibilidad. Información complementaria frase explicativa bajo gráfico. Fuentes datos fecha creación autores elementos rigurosos. Exportación formatos PDF PNG presentable imprenta/digital. Fase 4 exposición crítica constructiva (2 minutos): galería gráficos clase debate cuál comunicación más clara impactante publicable diario profesional. Prolongamiento: búsqueda gráficos periodísticos análisis manipulaciones errores técnicas. Creación gráficos propios datos establecimiento notas ausencias orientaciones comparación variables adicionales.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Selección tipo gráfico según datos + Creación colaborativa software tableur + Decisiones visuales esthétique + Información contextual rigurosa + Exposición crítica construcción mensaje
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 4 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 4 / 5</span>
+                    <h3>Muralismo Mexicano: Matemáticas y Arte Social</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Accroche artística emocional: proyección murales gigantescos Diego Rivera reconocimiento mundial magnitud escala monumentalidad. Pregunta contextual: ¿por qué pintar muros públicos en lugar lienzos museos? Respuesta histórica: Revolución Mexicana 1910-1920 transformación política social programa educativo José Vasconcelos años 1920 arte público denuncia social acceso democrático belleza. Artistas Rivera Orozco Siqueiros misión transmitir mensaje pueblo mural como medio comunicación transformador. Fase 1 análisis compositionnelle quantitative (18 minutos): estructura visual mural 50m² organización espacial. Figuras humaines tamaños diferenciados jerarquía visual intención política. Conteo personajes grupos sociales obreros ricos campesinos intelectuales proporciones distribución espacial. Cálculos porcentajes ocupación superficie cada grupo. Geometría composición triángulos círculos líneas fuga punto de fuga guía ojo profundidad muro plano creación ilusión tridimensional. Proporciones canon renacentista influencias matemáticas perspectiva. Fase 2 comparación art/données (20 minutos): nuestros gráficos demográficos actuales coinciden visión Rivera 1930? Poblaciones clases sociales urbanización cambiaron o siguen patrones predecibles? Datos México actualidad: ¿clase obrera sigue siendo mayoría o ha surgido clase media servicios? Proyecciones futuro 2030 2050 continuidad o ruptura. Arte como profecía visión política o documento época? Análisis Orozco Siqueiros: ¿coinciden proporciones o hay variaciones intencionales diferencias ideológicas artísticas? Fase 3 creación mural estadístico (10 minutos): planteamiento colaborativo: ¿cómo crear mural basado datos América Latina contemporánea? Qué países representar tamaños figuras? Figurativo como Rivera o abstracto como infografías? Soportes papier kraft cartón plume o digital tablettes. Simbolismo colores: urbanización rojo, crecimiento azul, ruralidad verde. Organización trabajo grupos roles pintura diseño coordinación. Fase 4 reflexión crítica (2 minutos): ¿Rivera era artiste ou sociólogo? ¿Nuestros gráficos tan 'engagés' políticamente? Poder simultáneo estadística y arte revelar denunciar injusticia. Prolongamiento: visita museos arte mexicano correspondencia escuelas México documentales muralismo investigación familias muralistas contemporáneas.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Historia Revolución Mexicana contexto + Análisis proporciones composición geometría + Cuantificación personajes grupos sociales + Comparación datos art históricos + Creación mural estadístico síntesis + Reflexión crítica engagement social
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 5 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 5 / 5</span>
+                    <h3>Presentación: Informe Demográfico América Latina</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Sesión culminante: transformación evaluación summativa en evento público valorización competencias desarrolladas. Contexto: público invitado dirección establecimiento profesores historia-geografía SES padres delegados partenarios educativos instituto Cervantes consulados. Objetivo pedagogía ciudadanía activa: estudiantes comunican públicamente enjeux demográficos contemporains América Latina apropiación significados social.
+
+Fase 1 organización logística (8 minutos): preguntas puesta en escena: ¿cómo organizar presentaciones grupos? ¿Tiempos 5-8-10 minutos por grupo criterios selección? ¿Todos miembros presentes o spokesperson? ¿Orden geográfico temático complejidad progresiva? Materiales: gráficos proyección listos alta resolución? Mural estadístico montado sistema audio ampliado micros? Apoyo técnico ordenador backup conectividad fiable?
+
+Fase 2 presentaciones grupos 1-3 contexto datos (20 minutos): grupo 1 presenta contexto general América Latina 650 millones habitantes diversidad geográfica histórica. Datos sorprenden contraste Brasil 215 vs Uruguay 3,5 magnitud diferencias. Cálculos media mediana revelan: media 47 millones mediana 32 millones heterogeneidad significativa. Errores evitados construcción gráficos metodología rigurosa fuentes CEPAL verificadas. Grupo 2 análisis métodos: fórmulas estadísticas aplicadas comparación media-mediana cuartiles limitaciones cada indicador. Cuándo preferir método según contexto decisiones técnicas justificadas. Grupo 3 interpretación resultados: qué revelan estadísticas estructura social América Latina factores históricos políticos económicos explican distribuciones poblacionales.
+
+Fase 3 presentaciones grupos 4-6 síntesis y arte (20 minutos): grupo 4 comparativas continentales: América Latina vs Europa vs Asia patrones universales o específicos? Proyecciones demográficas 2030-2050 tendencias futuro debate política planificación urbana. Grupo 5 análisis artístico: muralismo mexicano como testimonio desigualdades sociales Diego Rivera proporción figuras refleja visiones políticas. Mural estadístico equipo síntesis: cómo transformamos datos en arte visual? Decisiones compositivas simbolismo colores mensaje final. Grupo 6 reflexión ciudadana: recomendaciones gobiernos planificadores urbanos basadas estadísticas educación sanidad infraestructura vivienda. Datos influyen políticas públicas deben ciudadanos conocer realidades demográficas información poder transformación.
+
+Fase 4 preguntas público debate (10 minutos): público invitado formula interrogantes clarificaciones. Comprensión explicaciones técnicas estadísticas? Preguntas sorprenden genera disconformidad ideológica? Competencias comunicación científica desarrolladas? Certeza fuentes datos actualización información verificación confiabilidad?
+
+Fase 5 bilan evaluación colectiva (2 minutos): grupo comunicación más clara? Combinación datos-art más convincente? Experiencia ¿cambia vision estadísticas partir ahora? Aprendizajes significativos ciudadanía responsable.
+
+Diferenciaciónes: élèves fragiles soportes guiados roles adaptativos. Élèves avancés animación debate coordinación logística. Élèves hispanophones mediación culturelle vocabulario técnico.
+
+Prolongements: publicación web establecimiento concursos académicos innovación pédagógica correspondencia escuelas latinoamericanas actualización datos años siguientes. Orientación profesional demógrafo sociólogo data scientist.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Presentación pública eventos valorización competencias + Comunicación científica públicos diferenciados + Síntesis módulo datos-gráficos-arte + Reflexión ciudadanía enjeux sociaux + Demanda transformación capacidad acción
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMPETENCIAS -->
+        <div class="competencies">
+            <h2>Competencias Avanzadas Desarrolladas</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h4>📊 Recopilación Datos Demográficos</h4>
+                    <ul>
+                        <li>Acceso bases CEPAL fuentes oficiales confiables</li>
+                        <li>Evaluación calidad metadata fecha organismo</li>
+                        <li>Selección datos pertinentes variables multiples</li>
+                        <li>Organización sistemática información coherente</li>
+                        <li>Comparación verificación datos entre fuentes</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🔢 Estadística Análisis Datos</h4>
+                    <ul>
+                        <li>Media aritmética cálculo interpretación limitaciones</li>
+                        <li>Mediana posición central representatividad típica</li>
+                        <li>Cuartiles Q1 Q3 dispersión IQR análisis</li>
+                        <li>Detección valores atípicos criterios matemáticos</li>
+                        <li>Tableur verificación organización futuras análisis</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>📈 Visualización Gráficos Datos</h4>
+                    <ul>
+                        <li>Selección tipo gráfico óptimo según datos</li>
+                        <li>Creación software tableur herramientas online</li>
+                        <li>Decisiones esthétique visual coherencia colores</li>
+                        <li>Contextualización información títulos fuentes</li>
+                        <li>Análisis crítico manipulaciones visuales potenciales</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🎨 Historia Arte Muralismo Mexicano</h4>
+                    <ul>
+                        <li>Contexto Revolución Mexicana 1920 transformación</li>
+                        <li>Análisis compositionnelle geometría proporciones</li>
+                        <li>Cuantificación personajes grupos sociales intención</li>
+                        <li>Comparación datos-arte visiones políticas</li>
+                        <li>Síntesis artistique mensaje denuncia social</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🖌️ Creación Artística Engaged</h4>
+                    <ul>
+                        <li>Mural estadístico síntesis datos-arte colectivo</li>
+                        <li>Decisiones compositivas simbolismo colores mensaje</li>
+                        <li>Trabajo colaborativo roles diferenciados armonía</li>
+                        <li>Representación visual conceptos estadísticos complejos</li>
+                        <li>Intención política arte comunicación transformadora</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🎤 Comunicación Pública Ciudadanía</h4>
+                    <ul>
+                        <li>Presentación oral evento público competencia comunicación</li>
+                        <li>Explicación conceptos técnicos públicos diferenciados</li>
+                        <li>Respuesta preguntas pensamiento crítico reflexión</li>
+                        <li>Apropiación enjeux sociaux democracia participativa</li>
+                        <li>Transformación información en acción ciudadanía responsable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>Módulo 4 - Enjues Sociaux Contemporains et Art Engagé</strong></p>
+        <p>Pensionnat Sacré-Cœur, Reims | Matemáticas DNL Español | Seconde</p>
+        <p>
+            <span class="highlight">📊 Demografía recopilación datos CEPAL, Estadística medias medianas cuartiles análisis, Gráficos visualización tipos selección óptima, Muralismo Rivera análisis proporciones composición social, Mural estadístico síntesis art-datos, Presentación pública enjeux sociaux 📊</span>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.85;">
+            Módulo 4 inmersión enjues sociaux contemporains estadística rigorosa-arte engagé: recopilación demografía América Latina 650 millones habitantes CEPAL. Cálculos estadísticos transforman datos brutos información comprensible media mediana cuartiles. Gráficos visualización profesional tipos selección según datos transmisión efectiva mensajes. Muralismo mexicano Diego Rivera análisis proporciones geometría composición denuncia desigualdades sociales. Creación mural estadístico síntesis estudiantes transforman datos contemporáneos en arte visual inspirado Rivera rigor + emoción. Presentación pública evento ciudadanía activa público invitado directivos profesores padres comunidad apropiación enjues demográficos sociales. Descubrimiento: estadística herramienta poder conocimiento transformación. Arte complementa ciencia sentido emoción visión política. Estudiantes estrategas datos artistas engagés ciudadanos responsables. Paradoja módulo: números revelan injusticia detrás cada cifra millones vidas historias. Responsabilidad comunicar claramente convertir datos acción transformadora.
+        </p>
+    </div>
+</body>
+</html>

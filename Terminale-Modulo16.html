@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 16 - Compositores Hispanoamericanos y Algoritmos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1ed 0%, #efe9e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #C2185B 0%, #E91E63 50%, #00BCD4 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(194, 24, 91, 0.4);
+            border-bottom: 4px solid #00BCD4;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .header .level {
+            font-size: 0.95em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        /* VISTA GENERAL */
+        .overview {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .overview h2 {
+            color: #C2185B;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .overview p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .objective-item {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00BCD4;
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .objective-item strong {
+            color: #C2185B;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00BCD4 0%, #E91E63 50%, #C2185B 100%);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+        
+        /* SESIÓN CARD */
+        .session {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .session:nth-child(odd) .session-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+        
+        .session:nth-child(even) .session-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .session:nth-child(odd) .session-content,
+            .session:nth-child(even) .session-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+            }
+        }
+        
+        /* PUNTO DE LA TIMELINE */
+        .session::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00BCD4;
+            border: 4px solid #f5f1ed;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #C2185B;
+        }
+        
+        @media (max-width: 768px) {
+            .session::before {
+                left: 30px;
+            }
+        }
+        
+        .session-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f5f1ed;
+            transition: all 0.3s ease;
+        }
+        
+        .session-content:hover {
+            box-shadow: 0 8px 25px rgba(194, 24, 91, 0.15);
+            border-color: #00BCD4;
+            transform: translateY(-5px);
+        }
+        
+        .session-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #C2185B 0%, #00BCD4 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .session-content h3 {
+            color: #C2185B;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+        
+        .session-duration {
+            color: #E91E63;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .session-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .session-focus {
+            background: linear-gradient(90deg, rgba(0, 188, 212, 0.1) 0%, transparent 100%);
+            padding: 12px;
+            border-left: 3px solid #00BCD4;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+            margin-top: 12px;
+        }
+        
+        /* COMPETENCIAS */
+        .competencies {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .competencies h2 {
+            color: #C2185B;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .competency-card {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .competency-card h4 {
+            color: #C2185B;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+        
+        .competency-card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .competency-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .competency-card li::before {
+            content: '♪';
+            position: absolute;
+            left: 0;
+            color: #00BCD4;
+            font-size: 0.8em;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+        
+        .footer .highlight {
+            color: #00BCD4;
+            font-weight: bold;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.05em;
+            }
+            
+            .timeline::before {
+                height: 100%;
+            }
+            
+            .session-content {
+                padding: 20px;
+            }
+            
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Módulo 16</h1>
+            <p class="subtitle">Compositores Hispanoamericanos y Algoritmos</p>
+            <p class="level">Terminale - Matemáticas DNL Español - 5 Sesiones (5 horas)</p>
+        </div>
+    </div>
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- VISTA GENERAL -->
+        <div class="overview">
+            <h2>Visión General del Módulo</h2>
+            <p>
+                Módulo 16 síntesis magistral 3-años DNL: estudiantes descubren cómo compositores hispanoamericanos Villa-Lobos, Ginastera fusionaron tradición folclórica con matemáticas complejas algoritmos generativos. Inmersión profunda análisis espectral acústica (series Fourier), sérialismo dodecafónico transformaciones matriciales, programación creativa funciones generadoras melodías. Culminación concert público profesional donde interpretación creaciones propias explicación pedagógica matemática-musical transmite a audiencia real impacto sinergético. Eje transversal: música no es arte abstracto sino aplicación directa funciones exponenciales, trigonometría, teoría grupos, algoritmos recursivos que enriquecen expresión artística.
+            </p>
+            <p>
+                <strong>Síntesis final:</strong> Villa-Lobos folclore brasileño → Ginastera algoritmos composición → Acústica científica → Creación algorítmica → Concert público mediación experta
+            </p>
+            
+            <div class="objectives">
+                <div class="objective-item">
+                    <strong>🎼 Compositores Maestros:</strong> Villa-Lobos, Ginastera contexto histórico innovaciones
+                </div>
+                <div class="objective-item">
+                    <strong>📊 Análisis Espectral:</strong> Series Fourier, descomposición armónica, acústica matemática
+                </div>
+                <div class="objective-item">
+                    <strong>🔢 Algoritmos Sériales:</strong> Dodecafonismo, transformaciones matriciales, permutaciones
+                </div>
+                <div class="objective-item">
+                    <strong>💻 Programación Creativa:</strong> Scratch music, funciones generadoras, constraint-based composición
+                </div>
+                <div class="objective-item">
+                    <strong>🎵 Creación Auténtica:</strong> Composiciones personales bajo reglas matemáticas rigurosas
+                </div>
+                <div class="objective-item">
+                    <strong>🎤 Concert Profesional:</strong> Performance público + mediación pedagógica bilingüe experta
+                </div>
+            </div>
+        </div>
+        
+        <!-- TIMELINE -->
+        <div class="timeline">
+            <!-- SESIÓN 1 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 1 / 5</span>
+                    <h3>Villa-Lobos: Matemáticas y Folclore Brasileño</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Descubrimiento Heitor Villa-Lobos (1887-1959) "Padre música brasileña" revolucionó composición fusionando Bach estructuras contrapontísticas con folclore autóctono amazónico. Análisis Bachianas Brasileiras n°5 opus magistral: observación partitura patrones repetitivos secuencias matemáticas detectadas, cálculo frecuencias notas precisas (Do=261.63 Hz fórmula f(n)=440×2^(n/12)). Gamme tempérée vs escalas naturales: ratios consonancia (3:2 quinta perfecta, 4:3 cuarta, 5:4 tercera mayor) comparación propiedades acústicas europeas-brasileñas. Series Fourier aplicadas: descomposición sonido complejo f(t)=A₁sin(ωt)+A₂sin(2ωt)+A₃sin(3ωt)+... coeficientes representan firma armónica instrumental. Experimentación Audacity: visualización espectral tiempo real berimbau cuíca pandeiro versus violín flauta observación riqueza armónica instrumentos populares brasileños. Contexto histórico: Semana Arte Moderno 1922 São Paulo modernismo europeo cruce nacionalismo brasileño identidad cultural búsqueda. Escucha activa obras Villa-Lobos: reconocimiento procedencias folklóricas, identificación transformaciones matemáticas, análisis interacción materiales tradicionales-sinfónicos innovador.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Compositor auténtico contexto cultural + frecuencias precisas + análisis espectral + instrumentos tradicionales + modernismo vanguardia
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 2 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 2 / 5</span>
+                    <h3>Ginastera: Algoritmos en Composición</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Alberto Ginastera (1916-1983) compositor argentino evolucionó nacionalismo (Danzas Argentinas, Estancia folclore tango) serialismo integral. Sérialismo dodecafónico técnica revolución: utilización sistema 12 notas cromáticas escala en orden específico "serie base" prohibición repetición nota antes completar ciclo. Construcción serie personal: elección 12 sonidos diferentes, visualización matriz 12×12 transformaciones (serie original, inversión intervalos invertidos, retrógrado secuencia inversa, retrógrado inversión combinación). Cálculos precisos: si serie original Do, Re#, La, Fa#, Sol#, Si, Mib, Lab, La# Re, Fab Solb entonces inversión calcula intervalos desde Do respeto dirección opuesta obtención nueva serie validada. Transposiciones a 12 alturas diferentes: 4 formas base × 12 transposiciones = 48 formas totales serie explotadas compositivamente simultáneamente. Análisis obras Ginastera: Cantata América Mágica (1960) aplicación sérialismo integral alturas duraciones dinámicas, Concerto cuerdas op.33 (1965) avant-garde sofisticado. Programación Scratch: representación serie código lista notes, algoritmos transformaciones automáticas verificación restricciones respeto reglas compositivas. Debate estético: ¿matemáticas enriquecen creatividad o limitan libertad artística?, ¿émotión musical puede surgir algoritmos rigurosos?
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Sérialismo integral + transformaciones matriciales + evolución nacionalismo-vanguardia + programación algoritmos + debate estético filosofía
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 3 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 3 / 5</span>
+                    <h3>Acústica Matemática: Análisis Espectral</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Fundamentos físicos sonido: ondas sinusoidales ecuación y=A sin(2πft) donde A amplitud (intensidad), f frecuencia (altura grave/agudo), t tiempo. Propagación acústica espacio velocidad sonido 343 m/s aire temperatura ambiente. Longitud onda λ=v/f: nota baja frecuencia baja = onda larga, nota alta frecuencia alta = onda corta. Armónicos serie infinita frecuencias múltiplos fundamental: La 440 Hz (fundamental) + 880 Hz (2×), 1320 Hz (3×), 1760 Hz (4×) armónicos sucesivos. Series Fourier descomponen sonido real complejo suma infinita sinusoides: f(t)=A₁sin(ω₁t)+A₂sin(ω₂t)+A₃sin(ω₃t)+... donde coeficientes An magnitudes armónicos ωn = n×ω fundamental. Análisis comparativo instrumentos hispanoamericanos: guitarra española armónicos pares prominentes (sonoridad cálida), saxofón densidad armónica mayor (timbre brillante), castañuelas ruido blanco espectro continuo (sin fundamental definida). Experimentación Audacity comparaciones tiempo real: visualización espectral flauta versus violín versus cajón, cálculo amplitudes armónicas, medición decibeles intensidad. Aplicaciones tecnológicas: compresión MP3 elimina frecuencias no perceptibles oído humano, ecualizadores filtros audio controladores selectivos, acústica arquitectónica salas concierto optimizada propagación sonora.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Física ondas sonoras + series Fourier + análisis comparativo timbres + ecualizadores + acústica arquitectónica + tecnología audio digital
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 4 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 4 / 5</span>
+                    <h3>Composición Musical Asistida por Funciones</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Programación creativa funciones generadoras melodías: conversión valores numéricos notas musicales mapping estratégico. Función f(x)=sin(x) genera oscilaciones; discretización valores x=0,1,2,3... produce secuencia notas: f(0)=0→Do, f(1)≈0.84→Re, f(2)≈0.91→Mi... Codificación: Do=0 semitono, Re=2, Mi=4, Fa=5, Sol=7, La=9, Si=11 (doce tonos escala cromática), aplicación módulo 12 asegura ciclos octava correcta. Funciones variadas resultados musicales diferentes: f(x)=⌊5sin(x)+6⌋ genera melodía salpicada saltos, f(x)=3cos(x/2)+5 oscilaciones suave, f(x)=x mod 12 melodía lineal ascendente. Duraciones notas controladas función segunda: g(x)=|sin(x)|+0.5 genera ritmos variados intensidades. Programación Scratch musical bloques especializados notas-duraciones, generadores loops composiciones automáticas, interfaces gráficas paramétricas control interactivo. Restricciones esthétiques: evitar intervalos disonantes, forzar escalas específicas pentatónica-modal-cromática, utilizar sucesiones Fibonacci rítmicas, cadenas Markov progresiones acordales. Composiciones personales: estudiantes eligen función base, experimentan variantes parámetros, refinan estético resultado hasta satisfacción artística. Presentación públicas obras: explicación función matemática subyacente, demostración cómo modificación parámetro altera carácter musical, debate preferencias creaciones humanas versus algorítmicas.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Funciones generadoras + mapping numérico-musical + Scratch programming + restricciones esthétiques + creación personal + debate originalidad
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 5 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 5 / 5</span>
+                    <h3>Concierto: Matemáticas Sonoras Hispanoamericanas</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Evento cultural profesional transformando clase en concert público inmersivo mediado pedagógicamente. Organización logística: programa impreso 100 ejemplares explicaciones matemáticas accesibles público, sistema sonorización 16 canales, micrófono presentadores, proyección espectra musicales tiempo real, iluminación escénica ambiente. Bloque 1 patrimonio (15 min): interpretación Bachianas Brasileiras n°5 Villa-Lobos (arreglo estudiantes 4 min), Danza Gaucho Matrero Ginastera versión piano (3 min), demostración en vivo análisis espectral instrumentos (5 min), explicación matemática integrada 3 minutos. Bloque 2 creaciones estudiantes (20 min): 8 composiciones algorítmicas × 2 minutos cada, presentación breve demarche matemática 30 segundos obra, voto público "Prix du jury populaire" reconocimiento creativo. Bloque 3 interactivo (12 min): demostración composición tiempo real donde público modifica parámetros función observa cambios instantáneos música, "battle" humano versus algoritmo improvisación contraste improvisación tradicional-generativa, sesión Q&A audiencia preguntas curiosidades respuestas mediadores. Roles estudiantes especializados: 2-3 intérpretes musicales, 3 presentadores bilingüe aisance oración, 1 regidor sonido técnica, 2 documentalistas foto-vídeo, 2 coordinadores logística. Público: 50-100 personas familias, profesores, líderes comunitarios, media local, artistas profesionales. Evaluación impacto: encuestas satisfacción, feedback cualitativo auditors, cálculo engagement interactivo, cobertura media, impacto transformador percepción matemáticas-arte síntesis creativa.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Profesionalismo evento + patrimonio composición + creaciones originales + mediación pedagógica + participación audiencia interactiva + impacto comunitario transformador
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMPETENCIAS -->
+        <div class="competencies">
+            <h2>Competencias Desarrolladas</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h4>🎼 Músicos Españoles Maestros</h4>
+                    <ul>
+                        <li>Villa-Lobos: folclore brasileño, Bachianas Brasileiras</li>
+                        <li>Ginastera: sérialismo integral, Estancia, Cantata</li>
+                        <li>Contexto histórico nacionalismo → vanguardia</li>
+                        <li>Influencias maestros europeos Bach, Bartók</li>
+                        <li>Impacto escenas musicales latinoamericanas contemporáneas</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>📊 Análisis Espectral Avanzado</h4>
+                    <ul>
+                        <li>Series Fourier: descomposición armónica matemática</li>
+                        <li>Frecuencias notas: fórmula f(n)=440×2^(n/12)</li>
+                        <li>Timbres instrumentos: "firma" armónica única</li>
+                        <li>Software Audacity: análisis tiempo real visualización</li>
+                        <li>Acústica arquitectónica: optimización salas conciertos</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🔢 Sérialismo Dodecafónico</h4>
+                    <ul>
+                        <li>Serie base 12 notas: construcción validación restricciones</li>
+                        <li>Transformaciones: inversión, retrógrado, combinaciones</li>
+                        <li>Matrices dodecafónicas: 48 formas posibles série</li>
+                        <li>Cálculos intervalos precisos: conversión frecuencias</li>
+                        <li>Análisis Ginastera evolución estilística fascículos</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>💻 Programación Música Creativa</h4>
+                    <ul>
+                        <li>Scratch musical: bloques notas-duraciones especializados</li>
+                        <li>Funciones generadoras: sin(x), cos(x), exp, log aplicadas</li>
+                        <li>Mapping numérico-musical: valores→sonidos precisión</li>
+                        <li>Algoritmos composición: automática constraint-based</li>
+                        <li>Interfaces paramétricas interactivas tiempo real</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🎵 Creación Artística Rigurosa</h4>
+                    <ul>
+                        <li>Composiciones personales: originalidad matemática garantizada</li>
+                        <li>Restricciones esthétiques: escalas modos pentatonía</li>
+                        <li>Improvisación controlada: variaciones parámetros observadas</li>
+                        <li>Refinamiento iterativo: feedback crítico incorporado</li>
+                        <li>Documentación técnica: artist statements justificación conceptual</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🎤 Presentación Pública Experta</h4>
+                    <ul>
+                        <li>Mediación concepto complejo audiencia general accesible</li>
+                        <li>Demostración hands-on: interactividad participación público</li>
+                        <li>Narrativa creativa: números→historias emocionales sonoras</li>
+                        <li>Bilingüismo experto: español técnico-musical fluido</li>
+                        <li>Organización evento: logística profesional coordinación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>Módulo 16 - Compositores Hispanoamericanos y Algoritmos</strong></p>
+        <p>Pensionnat Sacré-Cœur, Reims | Matemáticas DNL Español | Terminale</p>
+        <p>
+            <span class="highlight">🎵 Villa-Lobos, Ginastera, y algoritmos: cómo compositores maestros y matemáticas avanzadas se fusionan en síntesis creativa magistral 🎵</span>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.85;">
+            Módulo 16 corona magistralmente 3 años DNL Terminale. De análisis frecuencial Villa-Lobos a sérialismo integral Ginastera pasando por acústica científica programación creativa: estudiantes demuestran que matemáticas complejas (funciones exponenciales, series Fourier, algoritmos recursivos, transformaciones matriciales) encuentran expresiones más profundas creativas en arte musical hispanoamericano, preparándoles para futuro interdisciplinario riguroso innovador.
+        </p>
+    </div>
+</body>
+</html>

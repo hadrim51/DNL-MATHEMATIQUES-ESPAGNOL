@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 9 Completo: Fibonacci y Arte Hispano-Latinoamericano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #3E2723;
+            background-color: #FFFFFF;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #C1440E 0%, #D84315 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .toc {
+            background-color: #F5E6D3;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border-left: 5px solid #C1440E;
+        }
+
+        .toc h2 {
+            color: #C1440E;
+            margin-bottom: 20px;
+        }
+
+        .toc-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 12px;
+        }
+
+        .toc-list a {
+            color: #3E2723;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .toc-list a:hover {
+            background-color: white;
+        }
+
+        .toc-badge {
+            background-color: #FFB300;
+            color: #3E2723;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 700;
+        }
+
+        .info-box {
+            background-color: #F5E6D3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #C1440E;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .info-item strong {
+            color: #C1440E;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .session-divider {
+            border: none;
+            height: 3px;
+            background: linear-gradient(90deg, #C1440E, #FFB300, #C1440E);
+            margin: 60px 0;
+            border-radius: 2px;
+        }
+
+        .session-card {
+            background-color: #F5E6D3;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            scroll-margin-top: 20px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-badge {
+            background-color: #FFB300;
+            color: #3E2723;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        h2 {
+            color: #C1440E;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #C1440E;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        h4 {
+            color: #D84315;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        strong {
+            color: #C1440E;
+            font-weight: 700;
+        }
+
+        em {
+            color: #D84315;
+            font-style: italic;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .question-box {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #FFB300;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .materials-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .production-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 2px solid #FFB300;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: #C1440E;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #F5E6D3;
+        }
+
+        tr:hover {
+            background-color: #FFF8E1;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #C1440E;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        @media print {
+            .back-to-top, .toc {
+                display: none;
+            }
+            .session-card {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header id="top">
+            <h1>📐 Módulo 9 Completo</h1>
+            <p class="subtitle">Fibonacci y el Arte Hispano-Latinoamericano</p>
+            <p class="subtitle">Suites Récurrentes y Proporción Áurea</p>
+            <p class="subtitle">Première DNL Español - 5 Sesiones (5 horas)</p>
+        </header>
+
+        <nav class="toc">
+            <h2>📑 Tabla de Contenidos</h2>
+            <ul class="toc-list">
+                <li>
+                    <a href="#sesion1">
+                        <span class="toc-badge">60 min</span>
+                        <strong>Sesión 1:</strong> Fibonacci y el Mundo Arabo-Hispánico
+                    </a>
+                </li>
+                <li>
+                    <a href="#sesion2">
+                        <span class="toc-badge">60 min</span>
+                        <strong>Sesión 2:</strong> Espirales en la Naturaleza Latinoamericana
+                    </a>
+                </li>
+                <li>
+                    <a href="#sesion3">
+                        <span class="toc-badge">120 min</span>
+                        <strong>Sesión 3:</strong> Torres García - Constructivismo y Proporción Áurea
+                    </a>
+                </li>
+                <li>
+                    <a href="#sesion4">
+                        <span class="toc-badge">60 min</span>
+                        <strong>Sesión 4:</strong> Creación Artística con Secuencias Matemáticas
+                    </a>
+                </li>
+                <li>
+                    <a href="#sesion5">
+                        <span class="toc-badge">60 min</span>
+                        <strong>Sesión 5:</strong> Análisis Proporcional en el Arte Hispánico
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="info-box">
+            <h2>🎯 Síntesis del Módulo</h2>
+            <p>El Módulo 9 explora las <strong>suites récurrentes</strong> a través de la célebre <strong>secuencia de Fibonacci</strong>, revelando conexiones profundas entre matemáticas, naturaleza y arte hispano-latinoamericano. Los estudiantes descubren cómo Leonardo Fibonacci introdujo la numeración árabe en Europa medieval, analizan espirales naturales en especies latinoamericanas, y examinan la <strong>proporción áurea (φ ≈ 1,618)</strong> en obras maestras de Torres García, Velázquez y Picasso. El módulo culmina con creaciones artísticas personales regidas por restricciones matemáticas.</p>
+
+            <div class="info-grid" style="margin-top: 20px;">
+                <div class="info-item">
+                    <strong>Competencias Matemáticas</strong>
+                    Suites récurrentes, convergencia, proporciones áureas
+                </div>
+                <div class="info-item">
+                    <strong>Competencias Lingüísticas</strong>
+                    Vocabulario técnico, presentaciones orales, análisis crítico
+                </div>
+                <div class="info-item">
+                    <strong>Competencias Culturales</strong>
+                    Transmisión arabo-hispánica, arte constructivista, biodiversidad
+                </div>
+                <div class="info-item">
+                    <strong>Competencias Transversales</strong>
+                    Creatividad, rigor científico, espíritu crítico
+                </div>
+            </div>
+        </div>
+
+        <!-- SESIÓN 1 -->
+        <section class="session-card" id="sesion1">
+            <div class="phase-header">
+                <span class="time-badge">⏱ 60 minutos</span>
+                <h2>🔢 Sesión 1: Fibonacci y el Mundo Arabo-Hispánico</h2>
+            </div>
+
+            <h3>Objetivos Pedagógicos</h3>
+            <ul>
+                <li>Construir y dominar la <strong>suite de Fibonacci</strong>: F(n) = F(n-1) + F(n-2)</li>
+                <li>Analizar la <strong>convergencia</strong> de los ratios hacia φ ≈ 1,618</li>
+                <li>Comprender la <strong>transmisión cultural</strong> de las matemáticas árabes a Europa</li>
+                <li>Identificar el rol de <strong>Al-Andalus</strong> y las Escuelas de Traductores de Toledo</li>
+                <li>Explorar aplicaciones en el <strong>arte hispano-musulmán</strong></li>
+            </ul>
+
+            <h3>Contexto Histórico: Leonardo Fibonacci (1170-1250)</h3>
+            <p><strong>Imperio comercial de Pisa:</strong> Leonardo Fibonacci viajó por el norte de África acompañando a su padre, mercader pisano. Durante estos viajes, aprendió el <strong>sistema de numeración árabe</strong> (cifras 0-9) y los métodos de cálculo posicionales.</p>
+
+            <p><strong>El Liber Abaci (1202):</strong> Al regresar a Italia, publicó este tratado revolucionario que introdujo las cifras árabes en Europa. El libro contenía el famoso <em>problema de los conejos</em>, que generó la secuencia que lleva su nombre.</p>
+
+            <p><strong>Reacción paradójica:</strong> Los gremios de contadores europeos, amenazados por la simplicidad del nuevo sistema, ¡prohibieron el uso de las cifras árabes para proteger sus privilegios profesionales!</p>
+
+            <h3>Construcción de la Suite de Fibonacci</h3>
+            <div class="materials-section">
+                <p><strong>Regla de recurrencia:</strong> Cada término es la suma de los dos términos anteriores.</p>
+                <p><strong>Fórmula:</strong> F(n) = F(n-1) + F(n-2)</p>
+                <p><strong>Condiciones iniciales:</strong> F(1) = 1, F(2) = 1</p>
+                <p><strong>Secuencia:</strong> 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987...</p>
+            </div>
+
+            <h3>Convergencia hacia el Número de Oro</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Término</th>
+                        <th>Valor F(n)</th>
+                        <th>Ratio F(n)/F(n-1)</th>
+                        <th>Aproximación φ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>F(3)</td>
+                        <td>2</td>
+                        <td>2/1 = 2,000</td>
+                        <td>Lejos de φ</td>
+                    </tr>
+                    <tr>
+                        <td>F(5)</td>
+                        <td>5</td>
+                        <td>5/3 ≈ 1,667</td>
+                        <td>Acercándose</td>
+                    </tr>
+                    <tr>
+                        <td>F(10)</td>
+                        <td>55</td>
+                        <td>55/34 ≈ 1,618</td>
+                        <td>Muy próximo</td>
+                    </tr>
+                    <tr>
+                        <td>F(20)</td>
+                        <td>6765</td>
+                        <td>6765/4181 ≈ 1,618034</td>
+                        <td>Prácticamente φ</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Convergencia extraordinaria:</strong> Los ratios convergen hacia φ = (1 + √5)/2 ≈ 1,618033988... Esta convergencia revela una armonía matemática profunda que se manifestará en la naturaleza y el arte.</p>
+
+            <h3>Transmisión Arabo-Hispánica</h3>
+            <p><strong>Al-Andalus (711-1492):</strong> La presencia árabe en la Península Ibérica transformó Europa. Ciudades como <strong>Córdoba y Toledo</strong> se convirtieron en centros del saber universal.</p>
+
+            <p><strong>Escuelas de Traductores de Toledo (siglos XII-XIII):</strong> Equipos multilingües de eruditos judíos, árabes y cristianos tradujeron obras maestras del árabe al latín: Euclides, Al-Khwarizmi, Avicena... Esta mediación hispano-árabe permitió que las matemáticas árabes (álgebra, algoritmos, numeración posicional) llegaran a Europa cristiana.</p>
+
+            <h3>Aplicaciones en el Arte Hispano-Musulmán</h3>
+            <ul>
+                <li><strong>Alhambra de Granada:</strong> Los palacios nazaríes exhiben proporciones matemáticas sofisticadas. Las salas principales respetan ratios próximos al número áureo.</li>
+                <li><strong>Mezquita de Córdoba:</strong> Las arcadas presentan proporciones que se aproximan a φ. El mihrab está posicionado según divisiones áureas del espacio.</li>
+                <li><strong>Azulejos del Alcázar de Sevilla:</strong> Patrones geométricos basados en proporciones armónicas.</li>
+                <li><strong>El Escorial (1563-1584):</strong> Felipe II encargó este monasterio-palacio con proporciones geométricas precisas.</li>
+            </ul>
+
+            <div class="production-box">
+                <h4>📝 Producciones Esperadas</h4>
+                <ul>
+                    <li>Suite de Fibonacci hasta el término 30 con ratios calculados</li>
+                    <li>Gráfico mostrando la convergencia progresiva hacia φ</li>
+                    <li>Investigación: aplicaciones en el arte hispano-musulmán (200 palabras)</li>
+                    <li>Análisis proporcional de una obra arquitectónica elegida</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="session-divider">
+
+        <!-- SESIÓN 2 -->
+        <section class="session-card" id="sesion2">
+            <div class="phase-header">
+                <span class="time-badge">⏱ 60 minutos</span>
+                <h2>🌀 Sesión 2: Espirales en la Naturaleza Latinoamericana</h2>
+            </div>
+
+            <h3>Objetivos Pedagógicos</h3>
+            <ul>
+                <li>Analizar <strong>espirales logarítmicas</strong> en la naturaleza regional</li>
+                <li>Efectuar <strong>medidas precisas</strong> de ratios geométricos</li>
+                <li>Diferenciar espiral de <strong>Arquímedes</strong> vs <strong>logarítmica</strong></li>
+                <li>Comprender <strong>ventajas evolutivas</strong> de formas espirales</li>
+                <li>Explorar <strong>biodiversidad matemática</strong> latino-americana</li>
+            </ul>
+
+            <h3>Colección de Especímenes</h3>
+            <p><strong>15 ejemplares diversos:</strong></p>
+            <ul>
+                <li>🐚 <strong>Nautilo del Caribe</strong> (Nautilus pompilius) - espiral perfecta</li>
+                <li>🐌 <strong>Caracolas venezolanas</strong> - diversas especies y tamaños</li>
+                <li>🦪 <strong>Conchas de abanico</strong> de Patagonia</li>
+                <li>🐌 <strong>Caracoles terrestres</strong> de Costa Rica</li>
+            </ul>
+
+            <h3>Dos Tipos Fundamentales de Espirales</h3>
+
+            <h4>Espiral de Arquímedes</h4>
+            <div class="materials-section">
+                <p><strong>Ecuación:</strong> r = aθ</p>
+                <p><strong>Característica:</strong> La distancia entre vueltas es constante (crecimiento lineal)</p>
+                <p><strong>Ejemplo:</strong> Surco de un disco de vinilo, algunas conchas primitivas</p>
+            </div>
+
+            <h4>Espiral Logarítmica ★ DOMINANTE</h4>
+            <div class="materials-section">
+                <p><strong>Ecuación:</strong> r = ae^(bθ)</p>
+                <p><strong>Característica:</strong> El ratio entre radios sucesivos es constante (crecimiento exponencial)</p>
+                <p><strong>Propiedad extraordinaria:</strong> La espiral mantiene su forma bajo rotación y ampliación</p>
+                <p><strong>Omnipresencia:</strong> 90% de los organismos espirales utilizan este tipo</p>
+            </div>
+
+            <h3>¿Por Qué la Naturaleza "Prefiere" la Espiral Logarítmica?</h3>
+            <ul>
+                <li><strong>Eficiencia espacial:</strong> Máximo volumen con mínimo material</li>
+                <li><strong>Resistencia mecánica:</strong> Distribución óptima de fuerzas</li>
+                <li><strong>Crecimiento continuo:</strong> El organismo puede crecer sin cambiar de forma</li>
+                <li><strong>Ahorro energético:</strong> Desarrollo con mínimo gasto metabólico</li>
+            </ul>
+
+            <h3>Biodiversidad Latino-Americana</h3>
+
+            <h4>🌻 Girasol Mexicano</h4>
+            <p><strong>Disposición de semillas:</strong> Siguen un ángulo de 137,5° (ángulo áureo = 360°/φ²). Este patrón permite el <em>empaquetamiento óptimo</em> de semillas. Se observan 21 espirales en un sentido y 34 en el otro (números de Fibonacci consecutivos!).</p>
+
+            <h4>🌲 Piña de Araucaria Chilena</h4>
+            <p><strong>Estructura:</strong> Las escamas forman espirales visibles: 8 en un sentido, 13 en el otro (Fibonacci). Protección máxima de las semillas con material mínimo.</p>
+
+            <h4>🍍 Ananás Costarricense</h4>
+            <p><strong>Patrón hexagonal:</strong> Las escamas forman tres conjuntos de espirales: 5, 8 y 13 (tres números consecutivos de Fibonacci!). La naturaleza resuelve un problema matemático complejo de manera "automática".</p>
+
+            <h3>Protocolo Experimental</h3>
+            <p><strong>Trabajo en binomios - Cada pareja recibe un espécimen diferente:</strong></p>
+
+            <h4>Etapa 1: Identificación del Centro</h4>
+            <ul>
+                <li>Localizar el punto de inicio de la espiral (ápice)</li>
+                <li>Marcar con lápiz suave sobre transparencia superpuesta</li>
+            </ul>
+
+            <h4>Etapa 2: Medidas Radiales</h4>
+            <ul>
+                <li>Utilizar <strong>calibre digital</strong> (precisión 0,01 mm)</li>
+                <li>Medir 10 radios consecutivos en ángulos regulares</li>
+                <li>Registrar medidas en tabla preparada</li>
+            </ul>
+
+            <h4>Etapa 3: Cálculo de Ratios</h4>
+            <ul>
+                <li>Para cada par de radios sucesivos: r(n+1) / r(n)</li>
+                <li>Verificar la constancia del ratio</li>
+                <li>Comparar con φ = 1,618...</li>
+            </ul>
+
+            <div class="production-box">
+                <h4>📝 Producciones Esperadas</h4>
+                <ul>
+                    <li>Ficha de medidas con 10 medidas radiales y ratios calculados</li>
+                    <li>Gráfico de evolución de los ratios por vuelta de espiral</li>
+                    <li>Análisis comparativo de 3 especies latinoamericanas (150 palabras)</li>
+                    <li>Hipótesis explicativas de ventajas evolutivas</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="session-divider">
+
+        <!-- SESIÓN 3 -->
+        <section class="session-card" id="sesion3">
+            <div class="phase-header">
+                <span class="time-badge">⏱ 120 minutos</span>
+                <h2>✨ Sesión 3: Torres García - Constructivismo y Proporción Áurea</h2>
+            </div>
+
+            <h3>Objetivos Pedagógicos</h3>
+            <ul>
+                <li>Analizar cuantitativamente obras de <strong>Torres García</strong></li>
+                <li>Realizar <strong>construcción geométrica</strong> del número de oro</li>
+                <li>Crear obra artística respetando <strong>proporciones matemáticas</strong></li>
+                <li>Comprender el <strong>Universalismo Constructivo</strong></li>
+            </ul>
+
+            <h3>Contexto Histórico</h3>
+            <p><strong>Joaquín Torres García (1874-1949):</strong> Artista uruguayo, formación en Barcelona, participación en las vanguardias parisinas, retorno a Montevideo en 1934.</p>
+
+            <p><strong>Teoría:</strong> "Universalismo constructivo" = estructura geométrica rigurosa + símbolos universales que trascienden culturas.</p>
+
+            <p><strong>Principios fundamentales:</strong></p>
+            <ul>
+                <li>Rechazo de la perspectiva: visión frontal, bidimensional asumida</li>
+                <li>Grille modulaire: composición basada en proporciones matemáticas</li>
+                <li>Colores puros: primarios + blanc/noir, máxima expresión</li>
+                <li>Símbolos universales: sol, luna, pez, ancla, corazón...</li>
+            </ul>
+
+            <h3>Análisis Matemático: "Constructivo Universal" (1943)</h3>
+            <div class="materials-section">
+                <p><strong>Dimensiones de la obra:</strong> 80 cm × 49,4 cm</p>
+                <p><strong>Ratio altura/anchura:</strong> 80 ÷ 49,4 = <strong>1,619 ≈ φ !</strong></p>
+                <p><strong>Módulos rectangulares internos:</strong></p>
+                <ul>
+                    <li>Rectángulo 20×12,4: ratio = 1,613 (próximo a φ)</li>
+                    <li>Rectángulo 15×9,3: ratio = 1,613 (próximo a φ)</li>
+                </ul>
+                <p><strong>Conclusión:</strong> Torres García aplicaba <em>sistemáticamente</em> la proporción áurea en sus composiciones, buscando una armonía matemática universal.</p>
+            </div>
+
+            <h3>Construcción Geométrica del Número de Oro</h3>
+            <p><strong>Método clásico con compás y regla:</strong></p>
+            <ol>
+                <li>Construir un cuadrado ABCD de lado 1</li>
+                <li>Marcar el punto M, mitad del lado BC</li>
+                <li>Trazar un arco centrado en M, de radio MA</li>
+                <li>Prolongar BC hasta su intersección con el arco (punto E)</li>
+                <li>El rectángulo AEFD es un <strong>RECTÁNGULO ÁUREO</strong></li>
+            </ol>
+
+            <div class="materials-section">
+                <p><strong>Verificación matemática:</strong></p>
+                <p>AE = BC + CE = 1 + √5/2 = (2 + √5)/2</p>
+                <p>Pero en el cuadrado: AB = 1</p>
+                <p>Donc ratio: AE/AB = (1 + √5)/2 ≈ 1,618</p>
+            </div>
+
+            <h3>Creación Artística Personal</h3>
+            <p><strong>Consigna:</strong> Crear una composición constructivista inspirada en Torres García.</p>
+
+            <h4>Restricciones Matemáticas</h4>
+            <ul>
+                <li>Formato: rectángulo áureo (A3 recortado según φ)</li>
+                <li>Mínimo 5 módulos interiores</li>
+                <li>Proporciones que respeten φ</li>
+                <li>Paleta limitada: 3 colores + blanco/negro</li>
+            </ul>
+
+            <h4>Libertades Creativas</h4>
+            <ul>
+                <li>Elección de símbolos, formas, texturas</li>
+                <li>Interpretación personal del constructivismo</li>
+                <li>Expresión de identidad creativa individual</li>
+                <li>Técnicas mixtas: dibujo, pintura, collage</li>
+            </ul>
+
+            <h3>Vernissage: Exposición Colectiva</h3>
+            <p><strong>Fase de presentación (30 minutos):</strong></p>
+            <ul>
+                <li>Parcours exposition: déambulation libre, observation mutuelle</li>
+                <li>5 presentaciones orales × 2 minutos cada una</li>
+                <li>Structure: "Mi composición se basa en..." + "He elegido..." + "El mayor desafío..."</li>
+                <li>Preguntas del público: 1 minuto de interacción</li>
+            </ul>
+
+            <div class="production-box">
+                <h4>📝 Producciones Esperadas</h4>
+                <ul>
+                    <li>Análisis matemático de una obra de Torres García con medidas detalladas</li>
+                    <li>Construcción geométrica del número áureo (étapes schématisées)</li>
+                    <li>Composición artística personal en formato A3</li>
+                    <li>Documentación fotográfica del proceso creativo</li>
+                    <li>Ficha técnica: dimensiones, proporciones utilizadas, justificación</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="session-divider">
+
+        <!-- SESIÓN 4 -->
+        <section class="session-card" id="sesion4">
+            <div class="phase-header">
+                <span class="time-badge">⏱ 60 minutos</span>
+                <h2>🎨 Sesión 4: Creación Artística con Secuencias Matemáticas</h2>
+            </div>
+
+            <h3>Objetivos Pedagógicos</h3>
+            <ul>
+                <li>Concebir obra artística original integrando <strong>secuencias matemáticas</strong></li>
+                <li>Respetar <strong>restricciones matemáticas</strong> rigurosas</li>
+                <li>Experimentar <strong>técnicas artísticas variadas</strong></li>
+                <li>Equilibrar <strong>libertad creativa</strong> y <strong>rigor científico</strong></li>
+            </ul>
+
+            <h3>Exploración de Secuencias Creativas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Secuencia</th>
+                        <th>Primeros Términos</th>
+                        <th>Aplicación Artística</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fibonacci</strong></td>
+                        <td>1, 1, 2, 3, 5, 8, 13, 21, 34, 55...</td>
+                        <td>Espirales, proporciones áureas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lucas</strong></td>
+                        <td>2, 1, 3, 4, 7, 11, 18, 29, 47, 76...</td>
+                        <td>Variación de Fibonacci</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Triangulares</strong></td>
+                        <td>1, 3, 6, 10, 15, 21, 28, 36...</td>
+                        <td>Pirámides, estructuras acumulativas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cuadrados</strong></td>
+                        <td>1, 4, 9, 16, 25, 36, 49, 64...</td>
+                        <td>Módulos geométricos perfectos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Padovan</strong></td>
+                        <td>1, 1, 1, 2, 2, 3, 4, 5, 7, 9...</td>
+                        <td>Espirales alternativas</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Traducción Números → Elementos Visuales</h3>
+            <p><strong>Reglas de conversión posibles:</strong></p>
+            <ul>
+                <li><strong>Color:</strong> Fibonacci(n) → color n de una paleta predefinida</li>
+                <li><strong>Forma:</strong> Término par → cuadrado, término impar → círculo</li>
+                <li><strong>Tamaño:</strong> Valor del término → dimensión en centímetros</li>
+                <li><strong>Ángulo:</strong> Ratio entre términos × 360° → ángulo de rotación</li>
+                <li><strong>Textura:</strong> Número primo → superficie rugosa, compuesto → lisa</li>
+            </ul>
+
+            <h3>Soportes Artísticos Disponibles</h3>
+
+            <h4>🎨 Artes Plásticas</h4>
+            <ul>
+                <li>Telas 30×40 cm o papel Canson A3</li>
+                <li>Pinturas acrílicas, acuarelas, pasteles</li>
+                <li>Técnicas mixtas: collage, dripping, estarcido</li>
+            </ul>
+
+            <h4>🗿 Escultura/Instalación</h4>
+            <ul>
+                <li>Arcilla autodurcissant, alambres metálicos</li>
+                <li>Materiales reciclados, cartones</li>
+                <li>Construcciones tridimensionales</li>
+            </ul>
+
+            <h4>💻 Arte Digital</h4>
+            <ul>
+                <li>Software: Gimp, Inkscape, Procreate, Krita</li>
+                <li>Programación creativa (Python, Processing)</li>
+                <li>Arte generativo algorítmico</li>
+            </ul>
+
+            <h4>🎼 Otras Expresiones</h4>
+            <ul>
+                <li>Composición musical: duraciones según Fibonacci</li>
+                <li>Coreografía: movimientos basados en secuencias</li>
+                <li>Poesía: número de sílabas por verso</li>
+            </ul>
+
+            <h3>Fase de Concepción (20 minutos)</h3>
+            <div class="question-box">
+                "¿Qué tipo de obra vais a realizar? ¿Qué secuencia como base? ¿Cómo traducir los números en elementos visuales? ¿Mínimo 12 términos de la secuencia elegida?"
+            </div>
+
+            <h3>Fase de Realización (15 minutos)</h3>
+            <p><strong>Acompañamiento individualizado:</strong> El profesor circula, ofrece correcciones técnicas, sugiere ajustes creativos, verifica la coherencia matemática de las reglas de conversión.</p>
+
+            <h3>Presentación Express (10 minutos)</h3>
+            <p><strong>Cada estudiante presenta en 1 minuto:</strong></p>
+            <ul>
+                <li>Secuencia matemática utilizada</li>
+                <li>Manifestación visual de la progresión</li>
+                <li>Efecto estético logrado</li>
+            </ul>
+
+            <div class="production-box">
+                <h4>📝 Producciones Esperadas</h4>
+                <ul>
+                    <li>Obra artística personal (formato libre)</li>
+                    <li>Ficha técnica: secuencia elegida, reglas de conversión, materiales</li>
+                    <li>Documentación del proceso creativo (fotos de las etapas)</li>
+                    <li>Presentación oral de 2 minutos en español</li>
+                    <li>Auto-evaluación: respeto de restricciones, originalidad, calidad técnica</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="session-divider">
+
+        <!-- SESIÓN 5 -->
+        <section class="session-card" id="sesion5">
+            <div class="phase-header">
+                <span class="time-badge">⏱ 60 minutos</span>
+                <h2>🖼️ Sesión 5: Análisis Proporcional en el Arte Hispánico</h2>
+            </div>
+
+            <h3>Objetivos Pedagógicos</h3>
+            <ul>
+                <li>Analizar <strong>proporciones matemáticas</strong> en obras maestras hispánicas</li>
+                <li>Dominar <strong>herramientas de medida</strong> y cálculo de ratios</li>
+                <li>Desarrollar <strong>espíritu crítico</strong> sobre relaciones matemáticas-belleza</li>
+                <li>Realizar <strong>investigación autónoma</strong> sobre obra elegida</li>
+            </ul>
+
+            <h3>Análisis: Velázquez - Las Meninas (1656)</h3>
+            <p><strong>Composición compleja:</strong> La Infanta Margarita en el centro, Velázquez a la izquierda pintando, espejos al fondo reflejando a los reyes Felipe IV y Mariana de Austria.</p>
+
+            <h4>Análisis Matemático</h4>
+            <ul>
+                <li><strong>Proporción áurea vertical:</strong> La división del cuadro respeta φ = 1,618</li>
+                <li><strong>Posición de la Infanta:</strong> Situada en el punto de intersección de las divisiones áureas</li>
+                <li><strong>Perspectiva matemática:</strong> Las líneas del suelo y techo convergen hacia puntos de fuga calculados</li>
+                <li><strong>Distribución de personajes:</strong> Espaciamiento según ratios armónicos</li>
+            </ul>
+
+            <p><strong>Conclusión:</strong> Velázquez aplicaba conscientemente proporciones geométricas sofisticadas, heredadas de los tratados renacentistas de perspectiva (Alberti, Piero della Francesca).</p>
+
+            <h3>Análisis: Picasso - Las Señoritas de Avignon (1907)</h3>
+            <p><strong>Revolución cubista:</strong> Esta obra marca la ruptura con la representación clásica.</p>
+
+            <h4>Geometría Cubista</h4>
+            <ul>
+                <li><strong>Deconstrucción de cuerpos:</strong> Múltiples puntos de vista simultáneos</li>
+                <li><strong>Fragmentación geométrica:</strong> Triángulos, polígonos, planos angulosos</li>
+                <li><strong>Proporciones menos evidentes:</strong> Pero presentes en la estructura compositiva global</li>
+                <li><strong>Nueva matemática visual:</strong> Géométrie non-euclidienne appliquée à la peinture</li>
+            </ul>
+
+            <p><strong>Comparación Velázquez/Picasso:</strong> ¿Continuidad o revolución? Las proporciones clásicas sobreviven de forma transformada. El cubismo propone nuevas matemáticas visuales pero no abandona totalmente los ratios armónicos.</p>
+
+            <h3>Exploración Personal (17 minutos)</h3>
+            <div class="question-box">
+                "¿Qué obra hispánica queréis analizar? ¿Botero, Kahlo, Miró, Dalí, Sorolla, Rivera, Goya, Murillo? ¿Qué hipótesis matemáticas formular?"
+            </div>
+
+            <h4>Artistas Disponibles</h4>
+            <ul>
+                <li><strong>Fernando Botero:</strong> Deformación geométrica, volúmenes exagerados</li>
+                <li><strong>Frida Kahlo:</strong> Autorretratos, proporciones simbólicas</li>
+                <li><strong>Joan Miró:</strong> Abstracción lírica, formas orgánicas y geométricas</li>
+                <li><strong>Salvador Dalí:</strong> Surrealismo matemático, anamorfosis</li>
+                <li><strong>Joaquín Sorolla:</strong> Luminisme, composiciones plein air</li>
+                <li><strong>Diego Rivera:</strong> Murales monumentales, composiciones épicas</li>
+            </ul>
+
+            <h4>Metodología de Investigación</h4>
+            <ol>
+                <li><strong>Formuler hypothèses:</strong> ¿Qué proporciones matemáticas podrían estar presentes?</li>
+                <li><strong>Réaliser mesures:</strong> Con reglas, software de análisis de imágenes (ImageJ, GeoGebra)</li>
+                <li><strong>Calculer ratios:</strong> Verificar aproximaciones a φ, otros ratios harmónicos</li>
+                <li><strong>Interpréter résultats:</strong> ¿Intencional o accidental? ¿Consciente o intuitivo?</li>
+            </ol>
+
+            <h3>Debate Final (2 minutos)</h3>
+            <div class="question-box">
+                "¿Las matemáticas limitan o enriquecen la creatividad artística? ¿Esta aproximación cambia vuestra mirada sobre el arte?"
+            </div>
+
+            <p><strong>Posiciones argumentadas:</strong></p>
+            <ul>
+                <li><strong>Tesis 1:</strong> Las restricciones matemáticas <em>estimulan</em> la creatividad</li>
+                <li><strong>Tesis 2:</strong> La libertad total produce obras más auténticas</li>
+                <li><strong>Síntesis:</strong> Belleza y rigor científico se fecundan mutuamente</li>
+            </ul>
+
+            <div class="production-box">
+                <h4>📝 Producciones Esperadas</h4>
+                <ul>
+                    <li>Análisis de una obra hispánica con medidas detalladas</li>
+                    <li>Cálculos de ratios y verificaciones matemáticas</li>
+                    <li>Interpretación estética (200 palabras en español)</li>
+                    <li>Presentación oral de 3 minutos sobre descubrimientos</li>
+                    <li>Reflexión crítica: ¿la presencia de proporciones áureas es intencional?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CONCLUSIÓN FINAL -->
+        <div class="info-box" style="margin-top: 60px;">
+            <h2>🎯 Conclusión General del Módulo</h2>
+            <p><strong>Síntesis magistral:</strong> Las matemáticas son una creación humana universal que trasciende culturas y épocas. Las sucesiones de Fibonacci, la proporción áurea y las espirales logarítmicas revelan patrones universales que conectan naturaleza, ciencia y arte. El arte hispano-latinoamericano dialoga constantemente con estas leyes geométricas, desde las teselaciones de la Alhambra hasta el constructivismo de Torres García. <em>Belleza y rigor científico se fecundan mutuamente para crear obras a la vez rigurosas e innovadoras.</em></p>
+
+            <h3>Competencias Desarrolladas</h3>
+            <ul>
+                <li>✅ <strong>Modelización matemática:</strong> Suites récurrentes, convergencia, espirales</li>
+                <li>✅ <strong>Análisis crítico:</strong> Evaluación de hipótesis, espíritu científico</li>
+                <li>✅ <strong>Creatividad con restricciones:</strong> Producción artística rigurosa</li>
+                <li>✅ <strong>Expresión oral en español:</strong> Presentaciones técnicas, debates argumentados</li>
+                <li>✅ <strong>Sensibilidad estética:</strong> Percepción armonías matemáticas</li>
+                <li>✅ <strong>Comprensión intercultural:</strong> Transmisión arabo-hispánica, arte latinoamericano</li>
+            </ul>
+
+            <p><strong>Preparación Terminale:</strong> Este módulo prepara idealmente a los estudiantes para niveles avanzados donde se convertirán en investigadores-creadores autónomos, capaces de investigaciones científicas de alto nivel conservando asombro estético y apertura cultural.</p>
+        </div>
+    </div>
+
+    <a href="#top" class="back-to-top" title="Volver arriba">↑</a>
+</body>
+</html>

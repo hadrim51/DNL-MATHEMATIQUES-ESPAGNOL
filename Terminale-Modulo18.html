@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 18 - Síntesis Final Interdisciplinaria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1ed 0%, #efe9e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #C2185B 0%, #E91E63 50%, #00BCD4 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(194, 24, 91, 0.4);
+            border-bottom: 4px solid #00BCD4;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .header .level {
+            font-size: 0.95em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        /* VISTA GENERAL */
+        .overview {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .overview h2 {
+            color: #C2185B;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .overview p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .objective-item {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00BCD4;
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .objective-item strong {
+            color: #C2185B;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00BCD4 0%, #E91E63 50%, #C2185B 100%);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+        
+        /* SESIÓN CARD */
+        .session {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .session:nth-child(odd) .session-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+        
+        .session:nth-child(even) .session-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .session:nth-child(odd) .session-content,
+            .session:nth-child(even) .session-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+            }
+        }
+        
+        /* PUNTO DE LA TIMELINE */
+        .session::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00BCD4;
+            border: 4px solid #f5f1ed;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #C2185B;
+        }
+        
+        @media (max-width: 768px) {
+            .session::before {
+                left: 30px;
+            }
+        }
+        
+        .session-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f5f1ed;
+            transition: all 0.3s ease;
+        }
+        
+        .session-content:hover {
+            box-shadow: 0 8px 25px rgba(194, 24, 91, 0.15);
+            border-color: #00BCD4;
+            transform: translateY(-5px);
+        }
+        
+        .session-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #C2185B 0%, #00BCD4 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .session-content h3 {
+            color: #C2185B;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+        
+        .session-duration {
+            color: #E91E63;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .session-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .session-focus {
+            background: linear-gradient(90deg, rgba(0, 188, 212, 0.1) 0%, transparent 100%);
+            padding: 12px;
+            border-left: 3px solid #00BCD4;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+            margin-top: 12px;
+        }
+        
+        /* COMPETENCIAS */
+        .competencies {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00BCD4;
+        }
+        
+        .competencies h2 {
+            color: #C2185B;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .competency-card {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .competency-card h4 {
+            color: #C2185B;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+        
+        .competency-card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .competency-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .competency-card li::before {
+            content: '◇';
+            position: absolute;
+            left: 0;
+            color: #00BCD4;
+            font-size: 0.8em;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            border-top: 4px solid #00BCD4;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+        
+        .footer .highlight {
+            color: #00BCD4;
+            font-weight: bold;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.05em;
+            }
+            
+            .timeline::before {
+                height: 100%;
+            }
+            
+            .session-content {
+                padding: 20px;
+            }
+            
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Módulo 18</h1>
+            <p class="subtitle">Síntesis Final Interdisciplinaria</p>
+            <p class="level">Terminale - Matemáticas DNL Español - 5 Sesiones (6 horas)</p>
+        </div>
+    </div>
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- VISTA GENERAL -->
+        <div class="overview">
+            <h2>Visión General del Módulo</h2>
+            <p>
+                Módulo 18 coronación magistral 3-años DNL: estudiantes sintetizan 18 módulos anteriores revelando fusión profunda matemáticas-literatura hispánica. Descubrimiento revolucionario: realismo mágico García Márquez modelizable matemáticamente—ciclos familiares Buendía siguen secuencias periódicas T(n+k)=T(n) calculables. Geometrías narrativas Cortázar topología pura—155 capítulos Rayuela representables como grafos con múltiples caminos lectura. Tiempo rulfiano Pedro Páramo atrae extraños—caos determinista donde muertos vivos coexisten sincronizados temporalidades emboîtées. Estudiantes sintetizan 150 obras creativas, organizan festival público transmutación establecimiento en laboratorio interdisciplinario, defienden proyectos excelencia ante jurados expertos. Culminación evento espectacular: 6 espacios temáticos (teatro borgésien, galería arte, laboratorio ciencia), 200 visitantes, mediación bilingüe experta, transmisión directa medios, permanencia documento investigación nacional. Síntesis experta: García Márquez paradoxas → Cortázar topología → Rulfo ciclos → Festival síntesis → Excelencia proyectos individual.
+            </p>
+            <p>
+                <strong>Síntesis culminante:</strong> Matemática-literatura hispánica fusionada expertise → ciclos familiares calculables → geometrías narrativas → tiempos caóticos → evento público transformador → proyectos científicos.
+            </p>
+            
+            <div class="objectives">
+                <div class="objective-item">
+                    <strong>📊 García Márquez Matemático:</strong> Paradoxas temporales, ciclos Buendía, realismo mágico modelizado
+                </div>
+                <div class="objective-item">
+                    <strong>📐 Cortázar Topología:</strong> Geometrías narrativas, grafos lectura, laberintos no-euclidianos
+                </div>
+                <div class="objective-item">
+                    <strong>⏰ Rulfo Caos Temporal:</strong> Ciclos emboîtées, atractores extraños, sincronización vida-muerte
+                </div>
+                <div class="objective-item">
+                    <strong>🎭 Festival Síntesis:</strong> Evento público 200 visitantes, 6 espacios, 150 obras, mediación experta
+                </div>
+                <div class="objective-item">
+                    <strong>🔬 Defensa Excelencia:</strong> Proyectos nivel universitario, jury experto, menciones reconocimiento
+                </div>
+                <div class="objective-item">
+                    <strong>💡 Síntesis 3-Años:</strong> Matemática-arte-cultura-ciencia integradas expertise definitiva
+                </div>
+            </div>
+        </div>
+        
+        <!-- TIMELINE -->
+        <div class="timeline">
+            <!-- SESIÓN 1 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 1 / 5</span>
+                    <h3>Paradoxas Matemáticas en García Márquez</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Descubrimiento central: realismo mágico García Márquez modelizable matemáticamente ciclos narrativos. Análisis "Cien años de soledad" familia Buendía: nombres repetición no-aleatoria—José Arcadio, Aureliano, Remedios generaciones sucesivas replican destinos anteriores bajo patrones calculables. Construcción árbol genealógico: 7 generaciones, 127 personajes, identificación secuencias recurrentes, períodos extracción. Modelización función F(n)=destino Buendía tiempo n, periodicidad determinar k tal que F(n+k)=F(n) ciclo completo. Cálculos: período temporal estimación generacional, duración promedio vidas, número eventos repetitivos por ciclo. Paradoxas temporales exploración: profecía Melquíades ¿predeterminada? Tiempo circulación vs lineal intuición común? Macondo cien años símbolo ciclos kármicos precolombinos (quipús incaicos, cosmología maya). Realismo mágico no contradicción lógica sino coexistencia múltiples temporalidades—matemática fractal auto-semejante donde microciclo refleja macrociclo estructuralmente. Análisis manuscritos Melquíades: sánscrito reverso cifra probabilística? Lectura final profecía coincide temporalidad exacta destrucción Macondo dinámica caótica determinista. Estudiantes construyen maquetas genealógicas, modelos temporales, simulaciones digitales ciclos Buendía, ensayan predicciones eventos narrativos mediante ecuaciones recurrencia. Comparación: otras obras García Márquez (El coronel no tiene quién le escriba, Memoria de mis putas tristes)—ciclos existenciales diferentes amplitudes, frecuencias.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Ciclos familiares modelizables + paraoxas temporales + realismo mágico matemático + profecía determinista + simulaciones digitales
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 2 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 2 / 5</span>
+                    <h3>Geometrías Narrativas en Cortázar</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Revolución estructural: "Rayuela" 155 capítulos no-secuencial propone múltiples ordenes lectura—ordre traditionnel 1-155 lineal vs "tablón" saltaos 1-2-116-3-84-4-71... provocando navegación caótica pero coherente. Representación topológica: cada capítulo nodo (vértice), transiciones posibles aristas (arcos), estructura grafo conexo orientado propiedades matemáticas calculables. Cálculos: número nodos 155, estimación aristas mínimo 200 máximo 1000 según flexibilidad lectura permitida. Análisis propiedades grafos: connexité (todos capítulos alcanzables?), ciclos presentes (¿circulaciones posibles?), grados nodales (capítulos más conectados=centrales narrativos). Representación 3D/4D geometría no-euclidiana—Rayuela existe topológicamente más que espacio tridimensional convencional. Concepto "lector cómplice" vs "lector hembra": primero sujeto activo navegación laberinto, segundo consumidor pasivo linealidad impuesta. Acto lectura redefinido: no consumo texto sino exploración espacial geométrico. Aplicación: construcción micro-récits multi-trajets propios (5-7 capítulos mínimo 3 órdenes lectura diferentes), verificación coherencia narrativa múltiples trayectorias, cálculo teórico número lecturas distintas. Comparación: otras estructuras narrativas (Montevidiano Oulipo, hipertextos digitales, videojuegos narrativos)—Cortázar precursor 50 años tecnología.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Rayuela topología pura + grafos múltiples caminos + lector cómplice + navegación no-lineal + micro-récits propios
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 3 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 3 / 5</span>
+                    <h3>Ciclos Temporales Matemáticos en Literatura</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Aprofundización: ciclos temporales complejos "Pedro Páramo" Juan Rulfo—narrativa supremamente no-cronológica entrelazando vivientes y muertos en sincronización caótica. Análisis personajes: Juan Preciado viaja Comala búsqueda padre Pedro Páramo, descubre pueblo fantasmagórico donde muertos habitan conviven vivientes, el mismo Rulfo experimentó tiempo simultáneo no-lineal. Construcción timeline dual: dimensión vivientes (años 1900s, eventos causales), dimensión muertos (atemporalidad, eventos recursivos sin causalidad). Sincronización: apariciones Susana San Juan, Dolores, figuras espectrales ocurren "cuando" Juan Preciado visita—¿realmente simultáneo o representación simbólica simultaneidad no-temporal? Modelización matemática: sistémas ciclos emboîtées, oscilladores no-lineales acoplados, atractores extraños dinámica caótica determinista. Fórmula recurrencia T(n+k) = T(n) describe periodicidad, pero perturbaciones pequeñas (butterfly effect) modifican trayectorias caóticas—imposibilidad predicción precisa pero determinismo subyacente. Análisis frecuencias: murmración muertes "voces" aparecen regularidad quasi-periódica, duración diálogos vivos/muertos correlacionan constantes matemáticas. Aplicación: reconstrucción cronología Rulfo (tarea imposible intencionalmente?), sincronización diferentes personajes, cálculos edades "reales" vs narrativas. Exploración: ¿tiempo precolombino cíclico (nahualismo azteca, calendarios mayas) influencia Rulfo? Comparación: Pedro Páramo vs García Márquez ciclismo vs Cortázar espacialismo.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Ciclos emboîtées vivos-muertos + caos determinista + atractores extraños + sincronización no-temporal + imposibilidad predicción
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 4 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 4 / 5</span>
+                    <h3>Festival Final: Síntesis Creativa Total</h3>
+                    <p class="session-duration">⏱ 120 minutos (2 horas)</p>
+                    <p class="session-description">
+                        Evento público transformador: establecimiento metamorfosis completa en laboratorio interdisciplinario, 200+ visitantes (familias, profesores, líderes culturales, medios), 6 espacios temáticos inmersivos, 150 obras 3-años estudiantes, performances medición experta bilingüe. Arquitectura espacial: TEATRE BORGÉSIEN (monólogos infinito matemático, diálogos combinatoria, laberintos literarios), GALERÍA ARTE-MATEMÁTICAS (150 obras azulejos, instalaciones cinéticas, arquitecturas gaudinianas, esculturas fractales), LABORATORIO CIENCIA (quipús interactivos, chaînettes Gaudí, espirales Fibonacci, probabilidades mayas, estilometría digital), AUDITORIUM MATEMÁTICAS SONORAS (conciertos algoritmos, composiciones Villa-Lobos/Ginastera, improvisaciones ritmos precolombinos), ESPACIO DATOS-VISUALIZACIÓN (infografías demográficas, data-art tiempo real, redes semánticos corpus), CAFÉ CULTURAL (degustación especialidades hispanoamericanas, conversaciones libres, testimonios visitantes). Programación 120 minutos: 15 min apertura oficial, 75 min circuitos libres + estaciones experimentos, 30 min síntesis + networking. Mediación: estudiantes-guías expertos, explicaciones técnicas accesibles, participación pública manipulativa activa. Concierto: suite Fibonacci instrumental (5 min), variaciones parabólicas electrónicas (4 min), estadísticas corales demografía (6 min), improvisación algoritmo ritmos (5 min). Conferencias: "Bolaño números" estilometría (8 min), "Gaudí matemático" revelaciones (7 min), "Borges informática anticipación" (5 min). Instalaciones interactivas: ecrans tactiles basedatos, data-painting tiempo real, redes semánticos, retratos generativos visitantes. Impacto: fotografía timelapse, videos documentales, encuestas satisfacción, testimonios espontáneos, cobertura medios locales/nacionales.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Festival público 200 visitantes + 6 espacios temáticos + 150 obras exhibidas + mediación experta bilingüe + performances artísticas + documentación permanente
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 5 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 5 / 5</span>
+                    <h3>Defensa Proyectos Individuales Excelencia</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Soutenance académica rigurosa: estudiantes presentan proyectos investigación 3-años ante jury experto calificado (profesores matemáticas/español, expertos universidad, representantes instituciones hispanophones, antiguos alumnos DNL expertos). Estructura cada presentación: 10 minutos exposición oral rigurosa, 2 minutos preguntas jury, criterios exigentes excellence nivel superior. Tipos proyectos esperados: (1) Investigaciones matemático-culturales avanzadas—modelización demográfica países hispanophones, análisis cuantitativos corpus literarios (estilometría Bolaño, análisis Borges combinatoria), estudios geométricos arquitecturas coloniales, algoritmos músicas tradicionales. (2) Creaciones pedagógicas innovadoras—recursos DNL otros establecimientos, aplicaciones numéricas educación bilingüe, exposiciones itinerantes matemática-cultura, formaciones docentes. (3) Producciones artisticas matemátizadas—composiciones musicales algorítmicas, instalaciones data-art interactivas, creaciones literarias bajo restricciones matemáticas, documentales pedagógicos bilingues. Evaluación: criterios rigurosos excellence matemática (rigurosidad demostrativa 8/20, innovación metodológica 6/20, complejidad conceptual 4/20, aplicaciones originales 2/20), maîtrise cultural hispánica (autenticidad fuentes 8/20, profundidad análisis 6/20, expresión española técnica 4/20, sensibilidad intercultural 2/20), creatividad interdisciplinaria (innovación pedagógica 8/20, síntesis matemática-cultura 6/20, producción artístico-técnica 4/20, impacto potencial 2/20). Níveis recognition: excellence excepcional 18-20/20 (investigación nivel universitario publicable), excellence confirmada 16-18/20 (proyectos innovadores demostrados), excellence en devenir 14-16/20 (trabajo serio rigor respetado). Menciones especiales: mejor investigación matemática, mejor análisis hispánico, mejor síntesis interdisciplinaria, mejor impacto pedagógico. Attestations officielles: reconocimiento diploma, valorización dossier Parcoursup, cartas recomendación profesores, premio institución. Impacto: proyectos publicables, posible difusión nacional/internacional, puerta acceso formaciones superiores elite, networking establecimientos hispanophones, potencial carrera investigación/creación.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Soutenance 10 minutos jury + 3 tipos proyectos (investigación-creación-pedagogía) + criterios excellence nivel superior + reconocimiento institucional + valorización Parcoursup
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMPETENCIAS -->
+        <div class="competencies">
+            <h2>Competencias Excepcionales Desarrolladas</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h4>📊 Matemática-Literatura Fusionada</h4>
+                    <ul>
+                        <li>Ciclos narrativos modelización secuencias périodiques</li>
+                        <li>Topología literaria: grafos, nodos, aristas narrativas</li>
+                        <li>Caos temporal: atractores extraños, sincronización</li>
+                        <li>Análisis cuantitativo corpus digital humanidades</li>
+                        <li>Simulaciones numéricas temporalidades complejas</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>📚 García Márquez Paradoxas</h4>
+                    <ul>
+                        <li>Realismo mágico modelizable matemáticamente rigor</li>
+                        <li>Genealogía Buendía: recurrencias, periodos, formulas</li>
+                        <li>Tiempo circular: profecía determinista vs libertad</li>
+                        <li>Influencias precolombinas: cosmología ciclos azteca-maya</li>
+                        <li>Comparaciones García Márquez: corpus completo análisis</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>📐 Cortázar Topología</h4>
+                    <ul>
+                        <li>Rayuela 155 capítulos: representación grafo topológica</li>
+                        <li>Navegación no-lineal: lector cómplice vs pasivo</li>
+                        <li>Geometrías narrativas: múltiples trayectorias coherencia</li>
+                        <li>Innovación pre-digital: anticipación hipertexto 50 años</li>
+                        <li>Construcción propias narraciones multi-trajets</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>⏰ Rulfo Caos Temporal</h4>
+                    <ul>
+                        <li>Ciclos emboîtées vivos-muertos sincronización caótica</li>
+                        <li>Atractores extraños: determinismo caos coexistencia</li>
+                        <li>Tiempo precolombino: influencias nahualismo calendario</li>
+                        <li>Imposibilidad reconstrucción cronológica intencional</li>
+                        <li>Sistemas osciladores acoplados no-lineales aplicación</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🎭 Mediación Experta Bilingüe</h4>
+                    <ul>
+                        <li>Comunicación conceptos complejos público diverso</li>
+                        <li>Interacción dinámica participación activa espectadores</li>
+                        <li>Bilingüismo español-francés técnico sofisticado</li>
+                        <li>Performance artística transmisión pedagógica</li>
+                        <li>Narrativas creativas matemática → emociones</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>🏆 Liderazgo Académico Interdisciplinario</h4>
+                    <ul>
+                        <li>Dirección proyectos investigación nivel superior</li>
+                        <li>Presentación pública expertise bilingüe maestra</li>
+                        <li>Síntesis 3-años: integración matemática-arte-cultura</li>
+                        <li>Innovación pédagogica reconocida nacional</li>
+                        <li>Ambassadores excelencia interdisciplinaria futura</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>Módulo 18 - Síntesis Final Interdisciplinaria</strong></p>
+        <p>Pensionnat Sacré-Cœur, Reims | Matemáticas DNL Español | Terminale</p>
+        <p>
+            <span class="highlight">🌐 Tres años excelencia: matemática-literatura fusionada, García Márquez calculable, Cortázar topológico, Rulfo caótico, evento público transformador, defensa proyectos nivel universitario 🌐</span>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.85;">
+            Módulo 18 clausura definitiva 3 años DNL Terminale. De García Márquez paradoxas temporales García Márquez a Cortázar geometrías narrativas pasando Rulfo ciclos caóticos, festival síntesis público y defensas excelencia: estudiantes demuestran competencias raras, excepcionales dominando matemáticas avanzadas aplicadas literatura (ciclos períodicos, topología grafos, caos temporal), creación artística audaz (150 obras), mediation científica experta bilingüe (200 visitantes), defensa rigorosa proyectos nivel experto. Tres años síntesis definitiva: matemáticas-historia-cultura-arte-ciencia fusionadas expertise. Radiografía transformación completa: adolescentes → jóvenes expertos bilingues científico-culturales → ambassadores futuro interdisciplinario.
+        </p>
+    </div>
+</body>
+</html>

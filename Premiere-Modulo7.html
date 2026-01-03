@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 7 - Arquitectura Contemporánea y Geometría 3D</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1ed 0%, #efe9e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #1565C0 0%, #0277BD 50%, #00838F 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(21, 101, 192, 0.4);
+            border-bottom: 4px solid #00838F;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .header .level {
+            font-size: 0.95em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+        
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        /* VISTA GENERAL */
+        .overview {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00838F;
+        }
+        
+        .overview h2 {
+            color: #1565C0;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .overview p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .objective-item {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00838F;
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .objective-item strong {
+            color: #1565C0;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00838F 0%, #0277BD 50%, #1565C0 100%);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+        }
+        
+        /* SESIÓN CARD */
+        .session {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .session:nth-child(odd) .session-content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+        
+        .session:nth-child(even) .session-content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .session:nth-child(odd) .session-content,
+            .session:nth-child(even) .session-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                text-align: left;
+            }
+        }
+        
+        /* PUNTO DE LA TIMELINE */
+        .session::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00838F;
+            border: 4px solid #f5f1ed;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px #1565C0;
+        }
+        
+        @media (max-width: 768px) {
+            .session::before {
+                left: 30px;
+            }
+        }
+        
+        .session-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f5f1ed;
+            transition: all 0.3s ease;
+        }
+        
+        .session-content:hover {
+            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.15);
+            border-color: #00838F;
+            transform: translateY(-5px);
+        }
+        
+        .session-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #1565C0 0%, #00838F 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .session-content h3 {
+            color: #1565C0;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            font-weight: normal;
+        }
+        
+        .session-duration {
+            color: #0277BD;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .session-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .session-focus {
+            background: linear-gradient(90deg, rgba(0, 131, 143, 0.1) 0%, transparent 100%);
+            padding: 12px;
+            border-left: 3px solid #00838F;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+            margin-top: 12px;
+        }
+        
+        /* COMPETENCIAS */
+        .competencies {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid #00838F;
+        }
+        
+        .competencies h2 {
+            color: #1565C0;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+        
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .competency-card {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f5f1ed 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #00838F;
+        }
+        
+        .competency-card h4 {
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+        
+        .competency-card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .competency-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .competency-card li::before {
+            content: '▲';
+            position: absolute;
+            left: 0;
+            color: #00838F;
+            font-size: 0.8em;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            border-top: 4px solid #00838F;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.95;
+        }
+        
+        .footer .highlight {
+            color: #00838F;
+            font-weight: bold;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.05em;
+            }
+            
+            .timeline::before {
+                height: 100%;
+            }
+            
+            .session-content {
+                padding: 20px;
+            }
+            
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Módulo 7</h1>
+            <p class="subtitle">Arquitectura Contemporánea y Geometría 3D: Gaudí, Calatrava & Superficies</p>
+            <p class="level">Primera - Matemáticas DNL Español - 5 Sesiones (5 horas)</p>
+        </div>
+    </div>
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- VISTA GENERAL -->
+        <div class="overview">
+            <h2>Visión General del Módulo</h2>
+            <p>
+                Módulo 7 exploración profunda geometría tridimensional arquitectura contemporánea hispánica superficies regladas: hiperboloides paraboloides estructuras curvas matemáticamente precisas. Gaudí arquitecto genio visión revolucionaria transforma curvas matemáticas construcción audaz Sagrada Família Casa Milà Park Güell. Superficies regladas descubrimiento: líneas rectas generatrices disposición particular crean superficies aparentemente curvas combinación extraordinaria. Construcción física hiperboloide: hilos y soportes rígidos demuestran generación intuición antes formalismo ecuaciones. Modelización avanzada: ecuaciones paramétricas x²/a² + y²/b² - z²/c² = 1 paraboloides hiperbólicos z = x²/a² - y²/b² exploración GeoGebra 3D animaciones interactivas. Arquitectura contemporánea hispánica descubrimiento: Santiago Calatrava estructuras biomimética cinéticas Valencia Ciudad Artes Ciencias, Rafael Moneo geometría adaptativa museos, Félix Candela coques béton ultra-finas México. Proyecto integradora: diseño Pabellón Expo Universal 2030 superficie reglada obligatoria restricciones presupuesto resistencia. Exposición evento público: presentación profesional jury arquitectos asesor técnico evaluación innovación matemática. Síntesis: geometría 3D transformada creación tangible rigurosamente matemática belleza estructural.
+            </p>
+            <p>
+                <strong>Síntesis experta:</strong> Gaudí superficies regladas intuición → Hiperboloides construcción física tangible → Ecuaciones paramétricas 3D modelos digitales → Calatrava Moneo Candela evolución contemporánea → Proyecto Expo pavillon innovador → Exposición jury profesional → Presentación bilingue técnica.
+            </p>
+            
+            <div class="objectives">
+                <div class="objective-item">
+                    <strong>🔷 Superficies Regladas:</strong> Hiperboloides paraboloides generación líneas rectas
+                </div>
+                <div class="objective-item">
+                    <strong>🏗️ Gaudí Arquitecto:</strong> Intuición matemática innovación revolucionaria Sagrada Família
+                </div>
+                <div class="objective-item">
+                    <strong>📐 Modelización 3D:</strong> Ecuaciones paramétricas GeoGebra animaciones interactivas
+                </div>
+                <div class="objective-item">
+                    <strong>🌊 Arquitectura Contemporánea:</strong> Calatrava Moneo Candela contemporánea hispanica
+                </div>
+                <div class="objective-item">
+                    <strong>✏️ Proyecto Arquitectónico:</strong> Diseño Expo pavillon superficies complejas
+                </div>
+                <div class="objective-item">
+                    <strong>🎯 Presentación Profesional:</strong> Exposición jury defensa técnica espagnol
+                </div>
+            </div>
+        </div>
+        
+        <!-- TIMELINE -->
+        <div class="timeline">
+            <!-- SESIÓN 1 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 1 / 5</span>
+                    <h3>Superficies Regladas: Descubrimiento 3D</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Accroche espectacular: "¿cómo construir forma curva usando solo líneas rectas?" Revisión módulo anterior Gaudí parábolas hipérbolas 2D transición tercera dimensión espacial. Proyección interior Sagrada Família bóvedas extraordinarias columnas ramificadas luz natural jugando superficies ondulantes. Pregunta provocadora central: "¿estas bóvedas son rectas o curvas? ¿Cómo es posible?" Descubrimiento concepto: superficie reglada genera infinitas líneas rectas dispuestas particular. Manipulación tactil primaria: maquetas hiperboloide transparente rotación libre observación desde ángulos múltiples. Construcción colaborativa: cada binomio arma hiperboloide usando dos círculos rígidos (diámetros 15-10cm) 30 hilos colorados conexiones precisas. Proceso paso por paso: identificación puntos fijación cálculo tensión apropiada verificación estabilidad forma esperada. Sorpresa aha moment: observación estructura final corresponde fotos Sagrada Família precisión asombrosa. Análisis arquitectónico Gaudí: por qué prefiere superficies regladas voûtes clásicas? Ventajas estructurales: distribución cargas óptima sin pilares centrales, resistencia compresión máxima piedra, eliminación arbotantes contrafuertes complejos. Contextualización histórica: Gaudí pionnier uso consciente superficies regladas arquitectura construcción, intuición matemática sin software informático, validación posteriori cálculos verifican precisión asombrosa. Pregunta abierta síntesis: "¿cómo describir matemáticamente forma que construimos?" Invitación módulo siguiente: ecuaciones paramétricas exploración digital. Prolongamiento investigación: visite virtual Sagrada Família en línea análisis técnica construcción 1882-2026.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Transición 2D a 3D + Concepto superficie reglada generación líneas rectas + Manipulación tactil construcción física + Análisis Gaudí intuición matemática + Ventajas estructurales + Sorpresa descubrimiento empírico
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 2 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 2 / 5</span>
+                    <h3>Hiperboloides y Paraboloides: Modelización Avanzada</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Pregunta matemática fundamental: "¿cómo describir algebraicamente superficie construida semana anterior?" Presentación ecuación canónica hiperboloide: x²/a² + y²/b² - z²/c² = 1 hiperboloide una nappe. Descodificación: parámetros a, b, c controlan dimenciones semiejes elongación alongamiento. Manipulación GeoGebra 3D inicial: interfaz exploración intuitiva navegación 360° visualización. Construcción colaborativa ecuación entrada parámetros personalizados (a=2, b=1,5, c=3) visualización superficie automática. Exploración interactiva paramétrica: cursores modificación valores tiempo real observación metamorfosis forma. Pregunta provocadora: "¿qué sucede si a=b=c?" (hiperboloide simétrico) "¿si a>>c?" (forma muy abierta) "¿si c>>a?" (cuello estrecho pronunciado). Análisis secciones planas: cortes horizontales crean círculos, cortes verticales generan hipérbolas confirmación teoría práctica numérica. Paraboloides hiperbólicos descubrimiento: ecuación silla caballo z = x²/a² - y²/b² forma silla montana. Modelización superficie alternativa aplicación Gaudí: identificación uso paraboloides bóvedas Sagrada Família. Proyecto personal: cada estudiante parametriza superficie reglada propia valores a, b, c elegidos, optimiza estética "belleza matemática". Animaciones desarrollo: generación automática génératrices visualización rotación. Cálculos aproximados resistencia: superficie puede soportar pesos? Comparación intuición vs cálculos numéricos. Síntesis conceptual: ecuaciones gobiernan formas Gaudí conscientemente ou intuición anticipó formalismo moderno? Transición siguiente: arquitectura contemporánea aplicación evolución Gaudí siglos XX-XXI.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Ecuaciones paramétricas hiperboloides + GeoGebra 3D navegación intuitiva + Manipulación paramétros interactiva tiempo real + Paraboloides hiperbólicos silla + Proyecto personal optimización estética + Animaciones génératrices + Cálculos resistencia aproximados
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 3 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 3 / 5</span>
+                    <h3>Arquitectura Contemporánea Hispánica</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Pregunta transición histórica: "¿Gaudí único arquitecto usar superficies regladas? ¿Cómo evoluciona arquitectura desde 1926?" Proyección espectacular: gare Calatrava Lisbonne estructura dinámica movilidad alas extensibles. Presentación Santiago Calatrava Valencia 1951 architecture ingeniería conjunción. Biomimética inspiración: alas palomas velas barcos estructuras naturales fluidas movimiento. Ciudad Artes Ciencias Valencia 1994-2009: catálogo completo innovación. Análisis formas geométricas: hiperboloides paraboloides superficies complejidad controlada. Ecuaciones versus intuición: cálculos estructura versus libertad artística biomimética. Otros arquitectos hispanohablantes: Rafael Moneo Madrid geometría adaptativa museos contemporáneos precisión matemática discreta belleza silenciosa. Félix Candela México 1910-1997 ingeniero revolucionario coques béton ultra-finas cascarones geometría mínima material máxima resistencia. Actividad investigación colaborativa: equipos especializados cada arquitecto dossier análisis técnica visual búsqueda internet fotografías publicaciones académicas. Presentación 5 minutos: exposición concepto matemático principal arquitecto comparación con Gaudí diferencias innovaciones tecnológicas. Pregunta reflexión: "¿matemáticas limitan creatividad arquitectónica ou la liberan?" Evolución tecnológica: cálculos manuales Gaudí vs CAD vs modelización paramétrica contemporánea vs inteligencia artificial generación forma automática. Síntesis síntesis: continuidad linaje Gaudí Calatrava Moneo Candela innovación matemática constante evolución herramientas numéricas.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Calatrava biomimética estructura dinámica + Moneo geometría adaptativa museos + Candela coques béton innovación + Investigación colaborativa dossiers arquitectos + Presentación técnica análisis comparativo + Evolución tecnológica herramientas cálculo + Reflexión matemáticas libertad creativa
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 4 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 4 / 5</span>
+                    <h3>Proyecto: Diseño de Edificio con Superficies Complejas</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Pregunta creativa proyecto: "¿seríais capaces diseñar pabellón exposición universal?" Lanzamiento proyecto oficial: Expo Universal 2030 Valencia localización hipotética. Cahier des charges profesional auténtico: capacidad 8000-12000 visitantes simultáneamente, presupuesto 15-25 millones euros, tiempo construcción máximo 18 meses, restricciones ambientales sostenibilidad, imagen España internacionalización. Formación equipos 3-4 personas especialización roles: arquitecto líder matemático especialista diseñador creativo expert técnico. Fase 1 investigación inspiration (15 minutos): análisis pavillones históricos Barcelona 1929 Mies van der Rohe geometría pura, Sevilla 1992 innovación tecnológica. Preguntas generación ideas: "¿cómo diferenciar pabellón existentes?" "¿qué concepto matemático destacar?" "¿qué problema social arquitectónico resolver?" Fase 2 concepto brainstorming: lluvia ideas libre restricciones superficies regladas obligatorias mínimo 2 diferentes hiperboloide + paraboloide, innovación tecnológica integrada (realidad virtual, estructuras desplegables, energías renovables). Fase 3 modelización GeoGebra 3D (25 minutos): parametrización formas elegidas, ajustes estética proporciones, exportación vistas múltiples planos. Cálculos aproximados resistencia: estructura soporta vientos 150 km/h? Evaluación costes materiales presupuesto. Documentación técnica: planos técnicos (vistas superior frontal perfil), ecuaciones superficies utilizadas, justificaciones matemáticas choices. Fase 4 presentación pitch ensayo (10 minutos): presentadores practican pitch comercial 3 minutos venta concept convencimiento jury.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Cahier des charges profesional authentique + Formación equipos especialización roles + Inspiración histórica pavillons + Brainstorming conceptual creativo + Modelización GeoGebra 3D parametrización + Cálculos resistencia costes + Documentación técnica dossier + Ensayo presentation pitch comercial
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SESIÓN 5 -->
+            <div class="session">
+                <div class="session-content">
+                    <span class="session-number">SESIÓN 5 / 5</span>
+                    <h3>Exposición Arquitectura Matemática Moderna</h3>
+                    <p class="session-duration">⏱ 60 minutos</p>
+                    <p class="session-description">
+                        Instalación expo galería profesional: transformación sala polivalente espacio exhibition. 6 islas presentación cada equipo con iluminación LED, paneles A2 explicativos, pantallas 24" proyección modelos 3D, maquetas físicas. Ambientación profesional: música arquitectónica (Philip Glass, Steve Reich), iluminación tamisada tipo galería arte, área acogida programa bilingüe. Invitación jury externo: arquitecto especialista superficie complejas, ingeniero estructura batel innovantes, profesor escuela arquitectura región. Fase 1 préparation (10 minutos): acomodación visitantes, presentadores toman posiciones, último ensayo pitch timing perfect. Fase 2 presentaciones (35 minutos): 6 equipos 8 minutos cada uno (7 min presentación + 1 min preguntas). Contenido pitch: concepto central pabellón solución problema arquitectónico, justificaciones matemáticas superficies regladas utilizadas, innovaciones tecnológicas integradas, estimación viabilidad presupuesto plazo. Demostración interactiva: manipulación modelos 3D por visitantes navegación GeoGebra animations. Fase 3 evaluación pública (3 minutos): voting público criterios "innovación matemática" "viabilidad técnica" "belleza representación España" "proyecto preferido personalmente". Jury profesional evalúa criterios técnicos detallados rigor innovación. Fase 4 synthèse bilan módulo (2 minutos): reflexión colectiva aprendizajes, evolución desde curvas simples Gaudí hasta arquitectura 3D contemporánea, perspectivas futuro módulos siguientes. Celebración clausura reconocimiento trabajo. Prolongamiento publicación: artículos web establecimiento comunicado prensa, newsletter familias, reseñas social media.
+                    </p>
+                    <div class="session-focus">
+                        <strong>Enfoque clave:</strong> Instalación expo galería profesional + Jury arquitectos externo + Presentaciones pitch commercial 8 minutos + Demostración interactiva modelos GeoGebra + Votación public criterios múltiples + Evaluación profesional rigurosa + Synthèse bilan aprendizajes módulo + Publicación difusión externes
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMPETENCIAS -->
+        <div class="competencies">
+            <h2>Competencias Desarrolladas</h2>
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h4>Geometría Espacial Avanzada</h4>
+                    <ul>
+                        <li>Comprensión superficies regladas hiperboloides paraboloides</li>
+                        <li>Ecuaciones paramétricas 3D modelización numérica</li>
+                        <li>Visualización mental espacios tridimensionales complejos</li>
+                        <li>Aplicaciones arquitectónicas prácticas innovación</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>Modelización Digital 3D</h4>
+                    <ul>
+                        <li>Dominio GeoGebra 3D navegación intuitiva construcción</li>
+                        <li>Parametrización interactiva superficies optimización</li>
+                        <li>Animaciones rotación secciones planas visualización</li>
+                        <li>Exportación modelos multiplataforma presentación</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>Análisis Arquitectónico Crítico</h4>
+                    <ul>
+                        <li>Evaluación innovaciones matemáticas arquitectos hispanicos</li>
+                        <li>Comparación evolución Gaudí contemporánea</li>
+                        <li>Identificación aplicaciones superficies complejas reales</li>
+                        <li>Síntesis perspectiva histórica tecnológica integrada</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>Proyecto Arquitectónico Auténtico</h4>
+                    <ul>
+                        <li>Diseño edificio respetando restricciones reales múltiples</li>
+                        <li>Integración mínimo 2 superficies regladas diferentes</li>
+                        <li>Justificación matemática rigurosa choices arquitectónicas</li>
+                        <li>Dossier técnico documentación profesional completa</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>Presentación Profesional Técnica</h4>
+                    <ul>
+                        <li>Pitch commercial convincente 3 minutos persuasivo</li>
+                        <li>Defensa argumentada matemática público especializado</li>
+                        <li>Exposición bilingüe vocabulario arquitectónico técnico espagnol</li>
+                        <li>Gestión preguntas jury bajo presión profesional</li>
+                    </ul>
+                </div>
+                <div class="competency-card">
+                    <h4>Trabajo Colaborativo Especializado</h4>
+                    <ul>
+                        <li>Coordinación equipos roles complementarios especializados</li>
+                        <li>Integración perspectivas matemática creativa técnica</li>
+                        <li>Resolución conflictos creativos negociación consenso</li>
+                        <li>Mentorado pares apoyo mutuo realización proyecto</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Módulo 7: Arquitectura Contemporánea & Geometría 3D</p>
+        <p><span class="highlight">Superficies Regladas Gaudí Calatrava Modelización Digital 3D</span> - Fusión matemáticas arquitectura creación espacios innovadores</p>
+        <p>Primera - DNL Español - Matemáticas</p>
+    </div>
+</body>
+</html>
